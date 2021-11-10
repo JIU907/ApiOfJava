@@ -7,6 +7,8 @@ package com.java.stream;
  */
 public class test {
     public static void main(String[] args) {
+          // 测试pull
+        System.out.println("Test");
         System.out.println("hello");
     }
 }
