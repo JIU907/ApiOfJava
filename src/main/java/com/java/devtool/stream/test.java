@@ -1,4 +1,4 @@
-package com.java.stream;
+package com.java.devtool.stream;
 
 /**
  * @author LeiLiMin
@@ -7,8 +7,6 @@ package com.java.stream;
  */
 public class test {
     public static void main(String[] args) {
-          // 测试pull
-        System.out.println("Test");
-        System.out.println("hello");
+
     }
 }
