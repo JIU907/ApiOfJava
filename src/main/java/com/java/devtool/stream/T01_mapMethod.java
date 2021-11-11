@@ -1,5 +1,7 @@
 package com.java.devtool.stream;
 
+import com.java.devtool.model.User;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

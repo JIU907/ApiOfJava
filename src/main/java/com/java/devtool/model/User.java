@@ -1,4 +1,4 @@
-package com.java.devtool.stream;
+package com.java.devtool.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +18,7 @@ import java.util.List;
 public class User {
     private Integer age;
     private Boolean sex;
-    private String Name;
+    private String name;
 
     public static List<User> getUsers(){
         List<User> list=new ArrayList<>();
