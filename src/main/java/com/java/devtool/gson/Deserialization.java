@@ -28,7 +28,6 @@ public class Deserialization {
 			}
 			test.add(subList);
 		}
-
 		long begin = System.currentTimeMillis();
 		String val = new Gson().toJson(test);
 		Type type = new TypeToken<List<List<Person>>>() {
@@ -49,11 +48,8 @@ public class Deserialization {
 	/**
 	 * 实现里层深拷贝
 	 * 需求：高性能
-	 * List<List<Object>>
-	 *
-	 * @param c
 	 */
-	public static Object deepCopy(Collection c) throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+	public static Object deepCopy(Collection c) {
 		Object[] a = c.toArray();
 		if (a.length != 0 && (c.getClass() == ArrayList.class)) {
 			ArrayList<Object> result = new ArrayList<>();
@@ -63,36 +59,23 @@ public class Deserialization {
 		return null;
 	}
 
-	public static Object processor(ArrayList<Object> result, Object[] a, Class<?> cacheClass, Map<String, Method> methodMap) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+	public static Object processor(ArrayList<Object> result, Object[] a, Class<?> cacheClass, Map<String, Method> cacheMethodMap) {
 		for (int i = 0; i < a.length; i++) {
 			// 如果数组中的元素出现 集合类型，就递归处理
 			if (a[i].getClass() == ArrayList.class) {
 				ArrayList<Object> subElement = new ArrayList<>();
 				result.add(subElement);
-				processor(subElement, ((Collection) a[i]).toArray(), cacheClass, methodMap);
+				processor(subElement, ((Collection) a[i]).toArray(), cacheClass, cacheMethodMap);
 			} else {
 				if (cacheClass == null)
 					cacheClass = a[i].getClass();
-				if (methodMap == null)
-					methodMap = Arrays.stream(cacheClass.getDeclaredMethods()).collect(Collectors.toMap(Method::getName, e -> e));
-				Object finalObject = createElement(cacheClass, a[i], methodMap);
+				if (cacheMethodMap == null)
+					cacheMethodMap = Arrays.stream(cacheClass.getDeclaredMethods()).collect(Collectors.toMap(Method::getName, e -> e));
+				Object finalObject = createElement(cacheClass, a[i], cacheMethodMap);
 				result.add(finalObject);
 			}
 		}
 		return result;
-	}
-
-	/**
-	 * 字符转大写
-	 *
-	 * @param c
-	 * @return
-	 */
-	public static char toUpperCase(char c) {
-		if (97 <= c && c <= 122) {
-			c ^= 32;
-		}
-		return c;
 	}
 
 	/**
@@ -113,12 +96,21 @@ public class Deserialization {
 				getMethod.setAccessible(true);
 
 				setMethod.invoke(finalObject, getMethod.invoke(source));
-
 			}
 			return finalObject;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * 字符转大写
+	 */
+	public static char toUpperCase(char c) {
+		if (97 <= c && c <= 122) {
+			c ^= 32;
+		}
+		return c;
 	}
 }
 
