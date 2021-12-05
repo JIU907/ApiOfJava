@@ -1,9 +1,7 @@
-package com.java.devtool.gson;
+package com.java.devtool.deepcopy;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import jdk.nashorn.internal.parser.TokenType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,10 +13,10 @@ import java.util.stream.Collectors;
 /**
  * @Author Lewis
  * @Date 2021/12/3 23:24
- * @Description 反序列化练习
+ * @Description 引用类型序列化
  */
-public class Deserialization {
-	public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+public class ReferenceList {
+	public static void main(String[] args){
 		List<List<Person>> test = new ArrayList<>();
 		for (int i = 0; i < 50; i++) {
 			List<Person> subList = new ArrayList<>();
@@ -121,5 +119,3 @@ class Person {
 	String name;
 	Integer age;
 }
-
-
