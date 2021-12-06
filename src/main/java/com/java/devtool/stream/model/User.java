@@ -1,4 +1,4 @@
-package com.java.devtool.model;
+package com.java.devtool.stream.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

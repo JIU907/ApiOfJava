@@ -1,6 +1,6 @@
-package com.java.devtool.bean_convert;
+package com.java.devtool.utils.bean_convert;
 
-import com.java.devtool.model.User;
+import com.java.devtool.stream.model.User;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.util.HashMap;

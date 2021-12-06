@@ -1,6 +1,6 @@
 package com.java.devtool.stream;
 
-import com.java.devtool.model.User;
+import com.java.devtool.stream.model.User;
 
 import java.util.List;
 import java.util.Map;

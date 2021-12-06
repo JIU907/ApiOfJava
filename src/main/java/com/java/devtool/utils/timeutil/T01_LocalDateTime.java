@@ -1,4 +1,4 @@
-package com.java.devtool.timeutil;
+package com.java.devtool.utils.timeutil;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
