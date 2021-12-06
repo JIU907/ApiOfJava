@@ -156,6 +156,26 @@ public class BasicList {
 				processor2(subElement, ((List) a[i]).toArray());
 			} else {
 				try {
+					if(a[i] instanceof Byte){
+						byte num=(byte) a[i];
+						result.add(num);
+					}
+					if(a[i] instanceof Short){
+						short num=(short) a[i];
+						result.add(num);
+					}
+					if(a[i] instanceof Long){
+						long num=(long) a[i];
+						result.add(num);
+					}
+					if(a[i] instanceof Double){
+						double num=(double) a[i];
+						result.add(num);
+					}
+					if(a[i] instanceof Float){
+						float num=(float) a[i];
+						result.add(num);
+					}
 					if(a[i] instanceof Integer){
 						int num=(int) a[i];
 						result.add(num);
