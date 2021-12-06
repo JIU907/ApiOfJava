@@ -1,4 +1,4 @@
-package com.java.devtool.deepcopy;
+package com.java.devtool.utils.deepcopy;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

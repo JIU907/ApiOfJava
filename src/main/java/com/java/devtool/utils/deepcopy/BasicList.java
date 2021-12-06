@@ -1,4 +1,4 @@
-package com.java.devtool.deepcopy;
+package com.java.devtool.utils.deepcopy;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,35 +13,42 @@ import java.util.List;
  * @Author Lewis
  * @Date 2021/12/3 23:24
  * @Description 基本数据类型的深拷贝
+ * 				Gson < reference < package
  */
 public class BasicList {
 	public static void main(String[] args) {
-		List<List<Long>> test = new ArrayList<>();
+		List<List<Integer>> test = new ArrayList<>();
 		for (int i = 0; i < 1000; i++) {
-			List<Long> subList = new ArrayList<>();
-			for (int j = 0; j < 1300; j++) {
-				subList.add(i + j + 1L);
+			List<Integer> subList = new ArrayList<>();
+			for (int j = 0; j < 1000; j++) {
+				subList.add(i + j );
 			}
 			test.add(subList);
 		}
+		// Reflect
+		long begin = System.currentTimeMillis();
+		Object o1 = deepCopy(test);
+		long end = System.currentTimeMillis();
+		System.out.println("反射\t"+(end - begin));
 
 		// Gson
-		long begin = System.currentTimeMillis();
+		 begin = System.currentTimeMillis();
 		String val = new Gson().toJson(test);
 		Type type = new TypeToken<List<List<Integer>>>() {
 		}.getType();
 		Object o = new Gson().fromJson(val, type);
-		long end = System.currentTimeMillis();
-		System.out.println(end - begin);
+		 end = System.currentTimeMillis();
+		System.out.println("序列化\t"+(end - begin));
 
-		// Reflect
+		// package unPackage
 		begin = System.currentTimeMillis();
-		Object o1 = deepCopy(test);
+		Object o2 = deepCopy2(test);
 		end = System.currentTimeMillis();
-		System.out.println(end - begin);
+		System.out.println("拆箱/装箱\t"+(end - begin));
+
 
 		// Final result
-		System.out.println(o1.toString().equals(o.toString()));
+		System.out.println(o1.toString().equals(o2.toString()));
 
 	}
 
@@ -51,8 +58,8 @@ public class BasicList {
 	public static Class getClass(Collection c) {
 		Object[] a = c.toArray();
 		while (true) {
-			if (a.length != 0 && (a[0] instanceof Collection)) {
-				a = ((Collection) a[0]).toArray();
+			if (a.length != 0 && (a[0] instanceof List)) {
+				a = ((List) a[0]).toArray();
 				continue;
 			}
 			return a[0].getClass();
@@ -104,7 +111,7 @@ public class BasicList {
 			Class type = getClass(c);
 			// 是否位基本数据类型包装类
 			basicTypeCheck(type);
-			// 获取对应的包装类
+			// 获取对应的构造方法
 			Constructor basicConstructor = getBasicConstructor(type);
 			// 深拷贝开始
 			return processor(new ArrayList<>(), a, basicConstructor);
@@ -114,10 +121,10 @@ public class BasicList {
 
 	public static Object processor(ArrayList<Object> result, Object[] a, Constructor constructor) {
 		for (int i = 0; i < a.length; i++) {
-			if (a[i] instanceof Collection) {
+			if (a[i] instanceof List) {
 				ArrayList<Object> subElement = new ArrayList<>();
 				result.add(subElement);
-				processor(subElement, ((Collection) a[i]).toArray(), constructor);
+				processor(subElement, ((List) a[i]).toArray(), constructor);
 			} else {
 				try {
 					result.add(constructor.newInstance(a[i]));
@@ -128,5 +135,39 @@ public class BasicList {
 		}
 		return result;
 	}
+	// =============
+	public static Object deepCopy2(Collection c) {
+		Object[] a = c.toArray();
+		if (a.length != 0) {
+			// 获取最内层 类型
+			Class type = getClass(c);
+			// 是否位基本数据类型包装类
+			basicTypeCheck(type);
+			// 深拷贝开始
+			return processor2(new ArrayList<>(), a);
+		}
+		return c == null ? null : new ArrayList<>();
+	}
+	public static Object processor2(ArrayList<Object> result, Object[] a) {
+		for (int i = 0; i < a.length; i++) {
+			if (a[i] instanceof List) {
+				ArrayList<Object> subElement = new ArrayList<>();
+				result.add(subElement);
+				processor2(subElement, ((List) a[i]).toArray());
+			} else {
+				try {
+					if(a[i] instanceof Integer){
+						int num=(int) a[i];
+						result.add(num);
+					}
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		return result;
+	}
+
+
 }
 
