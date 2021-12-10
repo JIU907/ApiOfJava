@@ -94,7 +94,12 @@ public class T02_Class {
         // 于geName的区别在于
         // getName是Jvm内的表示，getCanonicalName更容易被理解的表示
         System.out.println( T02_Class.class.getCanonicalName());
-
+//        day3   =====================================================================================
+        System.out.println("day3");
+        // 获取类中包含多少个public的内部类
+        subClassType.testClasses();
+        // 获取这个Java类的详细介绍信息
+        System.out.println(testClassType.class.getProtectionDomain());
     }
 }
 interface xxx{}
@@ -112,4 +117,11 @@ class testClassType{
         System.out.println("test 被初始化啦");
     }
 }
-class subClassType extends testClassType{}
+class subClassType extends testClassType{
+    int[] a;
+    public static void testClasses(){
+        Class<?>[] classes = subClassType.class.getClasses();
+        System.out.println(classes.length);
+    }
+    public class InnerClass{}
+}
