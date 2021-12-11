@@ -2,8 +2,8 @@ package com.java.devtool.jdk_study.lang;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
@@ -12,16 +12,14 @@ import java.lang.reflect.TypeVariable;
 @AllArgsConstructor
 public class T02_Class {
     /**
-     * enum is a kind of class
-     * annotation is a kind of interface
-     *
-     * (Class 是没有共有的构造函数，它的构造发生在JVM调用类装载器加载该Class)
-     *
-     * class 的构造器的入参是一个classLoader
-     *
+     * 1.enum is a kind of class
+     * 2.annotation is a kind of interface
+     * 3.Class 是没有public的构造函数，它的构造发生在JVM调用类装载器加载该Class
+     * 4.class 的构造器的入参是一个classLoader
      */
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-//        System.out.println(Object.class.toString());
+//     day1   =====================================================================================
+
         Class<T02_Class> type = T02_Class.class;
         System.out.println(type.getName());         //  全路径名称
         System.out.println(type.getSimpleName());   //  类名称
@@ -35,13 +33,12 @@ public class T02_Class {
          * 3.如果第三个参数为null,那么会调用bootstrap class loader 进行加载
          * 4.如果是 test[].class，那么test会被load，但不会被初始化
          */
-//        Class.forName("com.java.devtool.jdk_study.lang");
-        System.out.println(testClassType[].class);
+//         Class.forName("com.java.devtool.jdk_study.lang");
 
         /**
          * 1.调用无参构造方法创建一个对象，这个类会被初始化，前提是它之前并未初始化
          * 2.这个方法传播一些异常通过 空参构造器，包括一个检查异常，绕过了编译器的编译器异常检查
-         * 这个方法包装了任何由构造器引起的异常
+         * 3.这个方法包装了任何由构造器引起的异常
          */
         testClassType test1 = testClassType.class.newInstance();
 //     day2   =====================================================================================
@@ -100,6 +97,16 @@ public class T02_Class {
         subClassType.testClasses();
         // 获取这个Java类的详细介绍信息
         System.out.println(testClassType.class.getProtectionDomain());
+//        day4  =====================================================================================
+        /**
+         * Class中包含了很多反射相关的方法
+         * 需要特别注意的就是，但需要操作私有方法，私有字段时，需要将对应的字段和方法的安全检查机制关闭掉
+         *      eg: declaredFields[0].setAccessible(true;);
+         */
+        testClassType.class.getDeclaredMethods();
+        testClassType.class.getDeclaredConstructors();
+        Field[] declaredFields = testClassType.class.getDeclaredFields();
+        declaredFields[0].setAccessible(true);
     }
 }
 interface xxx{}
