@@ -16,6 +16,18 @@ public class T03_ClassLoader {
      * <p> 数组对象不通过class loader进行创建，但是必须自动的在java运行时被创建
      *     调用数组对象的(Class#getClassLoader()),返回的是其元素的ClassLoader
      *     如果其元素是原始的数据类型(primitive type)，这个数组的Class对象是没有ClassLoader的
-     *  </p>
+     * </p>
+     *
+     * <p>
+     *     应用程序实现Class Loader子类的方式去扩展JVM动态加载类的方式
+     * </p>
+     *
+     * <p>
+     *     Class Loder使用双亲委派机制去搜寻class文件或者资源
+     *     每一个Class Loader实例都有一个关联的parent Class Loader
+     *     当请求寻找一个Class文件或者资源，这个Class Loader将首先委托它的parent Class Loader去寻找
+     *     JVM固定的类加载器是Boot Strap Class Loader，它没有parent Class Loader，但是它可能作为一个parent Class Loader
+     *     为其他的Class Loader实例提供服务
+     * </p>
      */
 }
