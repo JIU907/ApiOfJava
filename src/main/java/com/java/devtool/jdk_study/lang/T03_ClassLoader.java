@@ -5,7 +5,7 @@ package com.java.devtool.jdk_study.lang;
  * @Description: ClassLoader.class学习
  * @date: 2021/12/11
  */
-public class T03_ClassLoader {
+public class T03_ClassLoader extends ClassLoader{
     /**
      * 1.ClassLoader负责对一个类进行加载
      * 2.给定一个类的名称，一个classLoader应该去尝试确定或者生产一个(关于这个类的定义信息)数据
@@ -30,4 +30,41 @@ public class T03_ClassLoader {
      *     为其他的Class Loader实例提供服务
      * </p>
      */
+    public static void main(String[] args) {
+        testClassLoader_DiedLock();
+    }
+    public static void testClassLoader_DiedLock(){
+        // 此处掩饰了类加载的死锁问题
+        // 支持并发得类加载器称为并行类加载器，他们需要在自己初始化时调用#registerAsParallelCapable()进行注册
+        /**
+         * Class Loader在进行初始化时默认的会设置为parallel class loader {@link ClassLoader#registerAsParallelCapable()}
+         * 那么并行不并行的有什么区别吗？有的
+         * 类加载入口观察: {@link ClassLoader#loadClass(String, boolean)}
+         *               {@link ClassLoader#getClassLoadingLock(String)},
+         *      1.并行时=>会将传入的name作为key，new Object()作为value，并且该value作为锁
+         *               也就是ClassLoader可以多线程去初始化不同的类
+         *      2.串行时=>会将该Class Loader作为lock，也就会导致如果多线程用该ClassLoader时会发生阻塞的情况
+         */
+        new Thread(()->new A()).start();
+        new Thread(()->new B()).start();
+    }
+}
+
+class A{
+    static{
+        System.out.println("Class A init");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        new B();
+    }
+}
+class B{
+    static{
+        System.out.println("Class B init");
+        new A();
+    }
+
 }
