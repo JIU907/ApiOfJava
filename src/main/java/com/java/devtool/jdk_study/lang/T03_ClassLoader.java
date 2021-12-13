@@ -45,6 +45,10 @@ public class T03_ClassLoader extends ClassLoader{
          *               也就是ClassLoader可以多线程去初始化不同的类
          *      2.串行时=>会将该Class Loader作为lock，也就会导致如果多线程用该ClassLoader时会发生阻塞的情况
          */
+        /**
+         * {@link java.lang.ClassLoader.ParallelLoaders}：并发容器锁的实现
+         * 这个类决定了{@link ClassLoader.parallelLockMap}是否为空
+         */
         new Thread(()->new A()).start();
         new Thread(()->new B()).start();
     }
