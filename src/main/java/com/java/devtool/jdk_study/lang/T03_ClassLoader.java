@@ -31,7 +31,27 @@ public class T03_ClassLoader extends ClassLoader{
      * </p>
      */
     public static void main(String[] args) {
+        T03_ClassLoader thisObject = new T03_ClassLoader();
+        /** {@link ClassLoader#loadClass(String, boolean)} */
+        thisObject.testMethod_loadClass();
         testClassLoader_DiedLock();
+    }
+    public void testMethod_loadClass(){
+        /**
+         * 通过指定二进制名称去加载类
+         * 默认的实现方式是按照顺序去调用方法
+         * 1.检查这个类是否被加载过
+         * 2.检查是否存在父加载器
+         *      如果存在父加载器，调用父类的loadClass()
+         *      如果不存在父加载器，就将次class loader交由JVM去执行
+         * 3.调用findClass去查找类
+         * 如果发现这个类已经处于上诉步骤并且解析标志为true(loadClass的第二个参数)，这个方法将调用#resolveClass(Class)
+         */
+        try {
+            this.getClass().getClassLoader().loadClass("com.java.devtool.jdk_study.lang.A");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     public static void testClassLoader_DiedLock(){
         // 此处掩饰了类加载的死锁问题
