@@ -28,6 +28,9 @@ public class T01_FloatEquals {
         float b2=1.00F;
         System.out.println(Objects.equals(a2,b2));  // true;
         System.out.println(a2==b2);                 // true;
-
+        System.out.println("==========");
+        double fa=0.33F;
+        long fl=10L;
+        System.out.println(fa*fl);
     }
 }
