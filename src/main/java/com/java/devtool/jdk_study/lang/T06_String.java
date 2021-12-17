@@ -1,5 +1,7 @@
 package com.java.devtool.jdk_study.lang;
 
+import java.nio.charset.Charset;
+
 /**
  * @Author LeiLiMin
  * @Description:
@@ -15,11 +17,35 @@ public class T06_String {
      * @param args
      */
     public static void main(String[] args) {
-        // testArgOfNullInvokeConstructorMethod();
+
         /**
          * String 被final修饰所以不可被继承
          * {@link String.value}被final修饰，所以String一旦初始化就不可被改变
          */
+
+        testArgOfNullInvokeConstructorMethod();
+
+
+
+
+
+
+
+    }
+
+    public static void testArgOfNullInvokeConstructorMethod() {
+        String s1 = null;
+        String s = new String(s1);
+    }
+
+    /**
+     * 总结一下String构造方法相关的小点
+     *  1.String可以通过String,char[],int[],byte[]进行创建
+     *  2.String通过Array进行初始化时，可以传入offset,count进行截取初始化
+     *  3.String通过byte[]进行初始化时，可以传入字符集进行初始化
+     *  4.String通过String Buffer和String Builder初始化
+     */
+    public static void testConstructorMethodOfString(){
         // 无参构造方法创建的对象是"";
         String blank = new String();
         // 通过传入String创建一个新的String对象，其实就是将字符数组和hash进行赋值
@@ -37,13 +63,12 @@ public class T06_String {
          */
         String copyFromCharArrByIndex=new String(charArr,1,0);
         System.out.println(copyFromCharArrByIndex);
-        // int[] intArr= {97,98};
+        int[] intArr= {97,98};
+        String copyFromIntArrByIndex=new String(intArr,1,1);
+        System.out.println(copyFromIntArrByIndex);
 
-
-    }
-
-    public static void testArgOfNullInvokeConstructorMethod() {
-        String s1 = null;
-        String s = new String(s1);
+        byte[] byteArr={0,1,2,3,4};
+        String s = new String(byteArr, Charset.defaultCharset());
+        System.out.println(s);
     }
 }
