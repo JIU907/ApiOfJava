@@ -12,9 +12,6 @@ public class T06_String {
      * 1.在Java程序中String代表一连串的字符
      * 2.String是常量，在它们创建之后是不可改变的，String Buffer是支持改变的
      * 3.String的拼接是通过String builder和String Buffer实现
-     * 4.用null去调用String的构造函数会被抛出异常NullPointerException
-     *
-     * @param args
      */
     public static void main(String[] args) {
 
@@ -23,16 +20,29 @@ public class T06_String {
          * {@link String.value}被final修饰，所以String一旦初始化就不可被改变
          */
 
-        testArgOfNullInvokeConstructorMethod();
+        // testArgOfNullInvokeConstructorMethod();
 
+        // testConstructorMethodOfString();
 
-
-
-
-
+        testCommonApi("Hello");
 
     }
 
+    public static void testCommonApi(String str){
+        // private final byte[] value;
+        str.length(); // 输出byte[]的长度
+        str.isEmpty();// return value.length == 0;
+        str.charAt(1);// return value[index];   Maybe Appear Exception "StringIndexOutOfBoundsException"
+
+
+        // 关于代码点的文章: https://blog.csdn.net/qlql489/article/details/82780716
+        System.out.println((char)str.codePointAt(1));    // 方法返回字符串中指定索引处的字符的Unicode值。
+        System.out.println((char)str.codePointBefore(1));// 方法返回字符串中指定索引处前一个字符的Unicode值。
+        System.out.println((int)str.codePointCount(0,0));      // 在输入的坐标中统计字符串数量
+    }
+    /**
+     * 用null去调用String的构造函数会被抛出异常NullPointerException
+     */
     public static void testArgOfNullInvokeConstructorMethod() {
         String s1 = null;
         String s = new String(s1);
