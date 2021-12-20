@@ -67,9 +67,20 @@ public class T06_String {
         String codePoint="😃";
         System.out.println("codePointCount: "+codePoint.codePointCount(0,codePoint.length()));    // 方法返回字符串中指定索引处的字符的Unicode值。
         System.out.println("StringLength: " + codePoint.length());
+
         // 方法返回字符串中指定索引处的字符的Unicode值。
         System.out.println(codePoint.codePointAt(0));
-
+        /**
+         *  在输入的index前找到最近的第一个代码点
+         *      如果是普通字符
+         *          直接返回unicode值
+         *      如果是4字节的字符
+         *          如果index-1的值处于低代理项，那么index-2是非负数的
+         *          如果index-2处于高代理项，则返回该代理项对的增补代码点值
+         *          如果index-1处的char值是未配对的低（高）代理项，则返回代理项值。
+         */
+        System.out.println((char)"codePoint".codePointBefore(2));
+        System.out.println(codePoint.codePointBefore(2));
     }
 
     /**
