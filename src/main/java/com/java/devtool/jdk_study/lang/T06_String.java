@@ -60,9 +60,16 @@ public class T06_String {
          *     编码字符集中每一个字符都和一个编号对应。那么这个编号就是代码点（Code Point）
          *     那一个char就能表示一个字符吗？ 比如：😃
          *                                并不行，这个表情需要2个char
+         *     下面这个例子: codePointCount: 1
+         *                 StringLength  : 2
          */
-        System.out.println("😃的长度:" + "😃".length());
-        System.out.println("😃的长度:".codePointAt(0));    // 方法返回字符串中指定索引处的字符的Unicode值。
+
+        String codePoint="😃";
+        System.out.println("codePointCount: "+codePoint.codePointCount(0,codePoint.length()));    // 方法返回字符串中指定索引处的字符的Unicode值。
+        System.out.println("StringLength: " + codePoint.length());
+        // 方法返回字符串中指定索引处的字符的Unicode值。
+        System.out.println(codePoint.codePointAt(0));
+
     }
 
     /**
