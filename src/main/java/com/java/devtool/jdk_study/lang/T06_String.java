@@ -19,41 +19,11 @@ public class T06_String {
          * String 被final修饰所以不可被继承
          * {@link String.value}被final修饰，所以String一旦初始化就不可被改变
          */
-
-        // testArgOfNullInvokeConstructorMethod();
-
-        // testConstructorMethodOfString();
-
-        // String str = "编";
-        // StringBuffer sb = new StringBuffer();
-        // char [] source_char = str.toCharArray();
-        // String unicode = null;
-        // for (int i=0;i<source_char.length;i++) {
-        //     unicode = Integer.toHexString(source_char[i]);
-        //     if (unicode.length() <= 2) {
-        //         unicode = "00" + unicode;
-        //     }
-        //     sb.append("\\u" + unicode);
-        // }
-        // System.out.println(sb);
-        //
-        // String testCode = "ab\uD83D\uDE03cd";
-        // int length = testCode.length();
-        // int count = testCode.codePointCount(0, testCode.length());
-        // System.out.println((char)128515);
-//length=6
-//count=5
         testCommonApi("Hello");
 
     }
 
-    public static void testCommonApi(String str) {
-        // private final byte[] value;
-        str.length(); // 输出byte[]的长度
-        str.isEmpty();// return value.length == 0;
-        str.charAt(1);// return value[index];   Maybe Appear Exception "StringIndexOutOfBoundsException"
-
-
+    public static void testCodePointApi(){
         // 关于代码点的文章: https://blog.csdn.net/qlql489/article/details/82780716
         /**
          * 先理解什么是代码点：
@@ -63,7 +33,6 @@ public class T06_String {
          *     下面这个例子: codePointCount: 1
          *                 StringLength  : 2
          */
-
         String codePoint="😃";
         System.out.println("codePointCount: "+codePoint.codePointCount(0,codePoint.length()));    // 方法返回字符串中指定索引处的字符的Unicode值。
         System.out.println("StringLength: " + codePoint.length());
@@ -71,16 +40,41 @@ public class T06_String {
         // 方法返回字符串中指定索引处的字符的Unicode值。
         System.out.println(codePoint.codePointAt(0));
         /**
-         *  在输入的index前找到最近的第一个代码点
-         *      如果是普通字符
-         *          直接返回unicode值
-         *      如果是4字节的字符
-         *          如果index-1的值处于低代理项，那么index-2是非负数的
-         *          如果index-2处于高代理项，则返回该代理项对的增补代码点值
-         *          如果index-1处的char值是未配对的低（高）代理项，则返回代理项值。
+         *  codePointBefore(int index): 字符串中指定索引之前字符的 Unicode 值。
+         *      index=0
+         *          throw new StringIndexOutOfBoundsException(index);
+         *          因为value[0]之前没有值，基本的char是2个字节
+         *      index=1；
+         *          如果index-1是一个普通字符那么直接返回该Unicode
+         *          如果index-1是一个4字节的字符
+         *              如果index-1的值处于低代理项，那么index-2是非负数的
+         *                  且index-2处于高代理项，则返回该代理项对的增补代码点值可以理解为UTF-32(四字节的表示)
+         *              如果index-1的值处于高代理项，直接返回高代理项
+         *
          */
-        System.out.println((char)"codePoint".codePointBefore(2));
-        System.out.println(codePoint.codePointBefore(2));
+        System.out.println((char)"codePoint".codePointBefore(1));
+        System.out.println(codePoint.codePointBefore(2));   // UTF-16 0xD83D 0xDE03
+
+        // 返回代码点的统计
+        System.out.println("codePointCount:"+codePoint.codePointCount(0,codePoint.length()));
+
+        // 返回此 String 中从给定的 index 处偏移 codePointOffset 个代码点的索引。文本范围内由 index 和 codePointOffset 给定的未配对代理项各计为一个代码点。
+        /**
+         * codepoint=😃 : 4 Bytes=> a b c d
+         * 从value[0]开始往后一个的一个代码点结束位置在d字节上
+         * 因为d到a之间隔了2个bytes的距离
+         * 所以result=2
+         */
+        System.out.println("offsetByCodePoints:"+codePoint.offsetByCodePoints(0,1));
+    }
+    public static void testCommonApi(String str) {
+        // private final byte[] value;
+        str.length(); // 输出byte[]的长度
+        str.isEmpty();// return value.length == 0;
+        str.charAt(1);// return value[index];   Maybe Appear Exception "StringIndexOutOfBoundsException"
+
+
+
     }
 
     /**
