@@ -1,5 +1,6 @@
 package com.java.devtool.jdk_study.lang;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 /**
@@ -19,8 +20,9 @@ public class T06_String {
          * String 被final修饰所以不可被继承
          * {@link String.value}被final修饰，所以String一旦初始化就不可被改变
          */
-        testCommonApi("Hello");
+        // testCodePointApi();
 
+        testCommonApi("HelloWorld");
     }
 
     public static void testCodePointApi(){
@@ -37,8 +39,8 @@ public class T06_String {
         System.out.println("codePointCount: "+codePoint.codePointCount(0,codePoint.length()));    // 方法返回字符串中指定索引处的字符的Unicode值。
         System.out.println("StringLength: " + codePoint.length());
 
-        // 方法返回字符串中指定索引处的字符的Unicode值。
-        System.out.println(codePoint.codePointAt(0));
+        // 方法返回字符串中指定索引处所处字符的Unicode值。
+        System.out.println("codePointAt："+codePoint.codePointAt(0));
         /**
          *  codePointBefore(int index): 字符串中指定索引之前字符的 Unicode 值。
          *      index=0
@@ -73,7 +75,45 @@ public class T06_String {
         str.isEmpty();// return value.length == 0;
         str.charAt(1);// return value[index];   Maybe Appear Exception "StringIndexOutOfBoundsException"
 
+        /**
+         * 从test_getChars中复制指定的字符到dst中
+         * srcBegin -- 字符串中要复制的第一个字符的索引。
+         * srcEnd   -- 字符串中要复制的最后一个字符之后的索引。
+         * dst      -- 目标数组。
+         * dstBegin -- 目标数组中的起始偏移量。
+         * [srcBegin,srcEnd] -- 复制作用域
+         */
+        String test_getChars=str;
+        char[] dstChar=new char[10];
+        test_getChars.getChars(1,8,dstChar,0);;
+        System.out.println(dstChar);
 
+        // 异曲同工
+        byte[] dstByte=new byte[10];
+        test_getChars.getBytes(0,1,dstByte,0);
+
+        try {
+            // 根据字符集获取字符串对应的byte array
+            byte[] charSetName = str.getBytes("utf-8");
+            byte[] charset = str.getBytes(Charset.defaultCharset());
+            byte[] noArg = str.getBytes();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        // equals 1.判断是否相等 2.判断arg是否为String 3.一次判断value是否相等
+        "".equals("");
+
+        // 判断String与String Buffer是否代表着一样的字符序列。如果是String Buffer那么比较时是同步的
+        /**
+         * {@link String#contentEquals(CharSequence)}
+         */
+        System.out.println("contentEquals:"+"1".contentEquals(new StringBuffer("2")));
+
+        // 忽略大小写的比较
+        System.out.println("equalsIgnoreCase:"+"abc".equalsIgnoreCase("ABC"));
+
+        // 比较字符串
+        System.out.println("compareTo:"+"b".compareTo("a"));
 
     }
 
