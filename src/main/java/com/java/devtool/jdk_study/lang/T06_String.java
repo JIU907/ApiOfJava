@@ -114,6 +114,8 @@ public class T06_String {
 
         // 比较字符串
         System.out.println("compareTo:"+"b".compareTo("a"));
+        // 忽略大小写的比较，返回的是int值
+        System.out.println("compareToIgnoreCase:"+"a".compareToIgnoreCase("A"));
 
     }
 
