@@ -117,6 +117,32 @@ public class T06_String {
         // 忽略大小写的比较，返回的是int值
         System.out.println("compareToIgnoreCase:"+"a".compareToIgnoreCase("A"));
 
+        /**
+         * ignoreCase -- 如果为 true，则比较字符时忽略大小写。
+         * toffset    -- 此字符串中子区域的起始偏移量。
+         * other      -- 字符串参数。
+         * ooffset    -- 字符串参数中子区域的起始偏移量。
+         * len        -- 要比较的字符数。
+         */
+        System.out.println("regionMatches:"+"abcde".regionMatches(1,"bbcde",1,1));
+        System.out.println("regionMatches ignoreCase:"+"abcde".regionMatches(true,1,"bBcde",1,1));
+
+        /**
+         * prefix -- 前缀。
+         * toffset -- 字符串中开始查找的位置。
+         *
+         * startsWith(String str) == startsWith(String str,0)
+         */
+        System.out.println("startsWith:"+"abc".startsWith("ab",1));
+        System.out.println("endsWith:"+"endsWith".endsWith("th")); // 其实调用的是startWith
+
+        /**
+         *  for (int i = 0; i < value.length; i++) {
+         *                 h = 31 * h + val[i];
+         *       }
+         */
+        System.out.println("a".hashCode());
+
     }
 
     /**
