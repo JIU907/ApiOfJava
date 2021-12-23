@@ -20,6 +20,8 @@ public class T06_String {
          * String 被final修饰所以不可被继承
          * {@link String.value}被final修饰，所以String一旦初始化就不可被改变
          */
+        // testArgOfNullInvokeConstructorMethod();
+        // testConstructorMethodOfString();
         // testCodePointApi();
 
         testCommonApi("HelloWorld");
@@ -142,6 +144,24 @@ public class T06_String {
          *       }
          */
         System.out.println("a".hashCode());
+
+        /**
+         * 字符串中查询字符位置
+         * return
+         *  -1:不存在
+         *  >=0:index
+         */
+        System.out.println("indexOf:"+"abc".indexOf("q"));
+        /**
+         * 从字符串的指定位置查询字符位置
+         *  fromIndex
+         *      <0              :fromIndex=0
+         *      >=value.length  :return -1
+         *  return
+         *      -1: 不存在
+         *      >=0: 字符存在，在字符串上的绝对位置，而不是fromIndex的相对地址
+         */
+        System.out.println("indexOf:"+"abc".indexOf("a",1));
 
     }
 
