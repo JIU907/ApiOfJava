@@ -162,6 +162,19 @@ public class T06_String {
          *      >=0: 字符存在，在字符串上的绝对位置，而不是fromIndex的相对地址
          */
         System.out.println("indexOf:"+"abc".indexOf("a",1));
+        // 返回字符在字符串中最后一次出现的位置
+        System.out.println("lastIndexOf:"+"aabbc".lastIndexOf("a"));
+        /**
+         *  重点：int i = Math.min(fromIndex, value.length - 1);
+         *       for (; i >= 0; i--) {
+         *                 if (value[i] == ch) {
+         *                     return i;
+         *                 }
+         *           }
+         *        这个fromIndex不是指从字符串的哪个位置开始扫描，而是从fromIndex从前开始扫描
+         *
+         */
+        System.out.println("lastIndexOf:"+"aaabc".lastIndexOf("a",1));
 
     }
 
