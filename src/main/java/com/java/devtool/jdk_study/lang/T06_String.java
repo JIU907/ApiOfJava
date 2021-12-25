@@ -188,7 +188,13 @@ public class T06_String {
          */
         System.out.println("substring 2 args:"+"substring".substring(1,2));
 
-
+        // concat
+        /**
+         * 拼接两个字符串
+         * concat方法用到了{@link String#getBytes(byte[], int, byte)}
+         *              : 主要作用就是 将当前字符串从start到end-1位置上的字符复制到字符数组c中，并从c的offset处开始存放
+         */
+        System.out.println("concat:"+"concat".concat("Test"));
     }
 
     /**
