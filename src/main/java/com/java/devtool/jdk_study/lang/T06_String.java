@@ -195,6 +195,9 @@ public class T06_String {
          *              : 主要作用就是 将当前字符串从start到end-1位置上的字符复制到字符数组c中，并从c的offset处开始存放
          */
         System.out.println("concat:"+"concat".concat("Test"));
+
+        // 替换字符串，将String中的oldChar替换为newChar
+        System.out.println("replace："+"aaabbbccc".replace('b','B'));
     }
 
     /**
