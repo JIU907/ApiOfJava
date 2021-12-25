@@ -176,6 +176,19 @@ public class T06_String {
          */
         System.out.println("lastIndexOf:"+"aaabc".lastIndexOf("a",1));
 
+        // substring
+        /**
+         * substring截取字符串
+         *      return: [index,value.length]的字符串
+         */
+        System.out.println("substring:"+"substring".substring(1));
+        /**
+         * 2 args的substring
+         *  return:[fromIndex,endIndex)的字符串
+         */
+        System.out.println("substring 2 args:"+"substring".substring(1,2));
+
+
     }
 
     /**
