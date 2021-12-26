@@ -213,8 +213,15 @@ public class T06_String {
 
         /**
          * 替换字符串中第一个出现的regex字符为replacement字符
+         * 是基于正则表达式的替换
          */
-        System.out.println("replaceFirst: "+"aaabbbccc".replaceFirst("x","A"));
+        System.out.println("replaceFirst: "+"123bbbccc".replaceFirst("\\d","A"));
+
+        /**
+         * 全部替换
+         */
+        System.out.println("replaceAll: "+"123bbbccc".replaceAll("\\d","A"));
+
     }
 
     /**
