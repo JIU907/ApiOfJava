@@ -198,6 +198,12 @@ public class T06_String {
 
         // 替换字符串，将String中的oldChar替换为newChar
         System.out.println("replace："+"aaabbbccc".replace('b','B'));
+
+        /**
+         * arg: 正则表达式
+         * return: Boolean=> 字符串是否符合入参中的正则表达式
+         */
+        System.out.println("matches: "+"matches".matches(".*s"));
     }
 
     /**
