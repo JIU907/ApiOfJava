@@ -204,6 +204,17 @@ public class T06_String {
          * return: Boolean=> 字符串是否符合入参中的正则表达式
          */
         System.out.println("matches: "+"matches".matches(".*s"));
+
+        /**
+         * 是否包含入参字符串
+         * 其实内部是调用了indexOf方法
+         */
+        System.out.println("contains:"+"contains".contains("con"));
+
+        /**
+         * 替换字符串中第一个出现的regex字符为replacement字符
+         */
+        System.out.println("replaceFirst: "+"aaabbbccc".replaceFirst("x","A"));
     }
 
     /**
