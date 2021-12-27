@@ -218,7 +218,7 @@ public class T06_String {
         System.out.println("replaceFirst: "+"123bbbccc".replaceFirst("\\d","A"));
 
         /**
-         * 全部替换
+         * 正则表达式-全部替换
          */
         System.out.println("replaceAll: "+"123bbbccc".replaceAll("\\d","A"));
 
