@@ -1,5 +1,6 @@
 package com.java.devtool.jdk_study.lang;
 
+import javax.xml.transform.Source;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
@@ -222,6 +223,17 @@ public class T06_String {
          */
         System.out.println("replaceAll: "+"123bbbccc".replaceAll("\\d","A"));
 
+        /**
+         * arg: 正则表达式
+         * arg limit: 限制return 数组的长度
+         * return: 通过输入的正则表达式来切分字符串，返回一个数组
+         *         如果输入的表达式无法正确匹配，那么返回的元素只有一个元素，那就是该字符串
+         */
+        String[] splitArr = " ,s,p,l,i,t".split(",",100);
+        for (String s : splitArr) {
+            System.out.println("split: "+s);
+
+        }
     }
 
     /**
