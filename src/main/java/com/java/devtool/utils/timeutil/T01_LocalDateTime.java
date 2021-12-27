@@ -11,8 +11,11 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class T01_LocalDateTime {
     public static void main(String[] args) {
-        // 1.获取 时区当前时间毫秒值
-        Long nowMills = LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
+        // 1.获取秒数
+        Long second = LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
+        // 2.获取毫秒数
+        Long milliSecond = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
+
 
         // [0,num);
         for (int i = 0; i < 99999; i++) {
