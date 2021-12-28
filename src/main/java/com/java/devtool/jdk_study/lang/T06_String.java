@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -248,6 +249,12 @@ public class T06_String {
         // Iterable join
         List<String> collect = Arrays.stream(joinArr).collect(Collectors.toList());
         System.out.println("join Iterable: "+String.join("-",collect));
+
+        /**
+         * String 大小写转换
+         */
+        System.out.println("toLowerCase :"+"toLowerCase".toLowerCase());
+        System.out.println("toUpperCase :"+"toUpperCase".toUpperCase());
 
     }
 
