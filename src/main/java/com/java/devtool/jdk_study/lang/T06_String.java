@@ -260,6 +260,24 @@ public class T06_String {
          * 去除字符串收尾的空格
          */
         System.out.println("trim:["+"  tri m  ".trim()+"]");
+
+        /**
+         * 获取字符数组
+         */
+        char[] chars = "toCharArray".toCharArray();
+        System.out.println("toCharArray:"+"toCharArray".toCharArray());
+
+        /**
+         * 字符串格式化
+         * 类似于C
+         *      : char charArr[10]="abc";
+         *      ：printf("%s",charArr);
+         */
+        String format=null;
+        format=String.format("Hi,%s", "Lewis");
+        System.out.println(format);
+
+
     }
 
     /**
