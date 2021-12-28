@@ -234,6 +234,14 @@ public class T06_String {
             System.out.println("split: "+s);
 
         }
+
+        /**
+         * arg: delimiter
+         *      elements
+         * return:  将elements中的每个元素通过delimiter连接，返回一个新字符串
+         */
+        String[] joinArr=new String[]{"abc","cbd"};
+        System.out.println("join: "+String.join("-",joinArr));
     }
 
     /**
