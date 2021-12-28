@@ -256,6 +256,10 @@ public class T06_String {
         System.out.println("toLowerCase :"+"toLowerCase".toLowerCase());
         System.out.println("toUpperCase :"+"toUpperCase".toUpperCase());
 
+        /**
+         * 去除字符串收尾的空格
+         */
+        System.out.println("trim:["+"  tri m  ".trim()+"]");
     }
 
     /**
