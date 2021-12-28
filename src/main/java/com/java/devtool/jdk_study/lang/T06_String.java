@@ -3,6 +3,9 @@ package com.java.devtool.jdk_study.lang;
 import javax.xml.transform.Source;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author LeiLiMin
@@ -242,6 +245,10 @@ public class T06_String {
          */
         String[] joinArr=new String[]{"abc","cbd"};
         System.out.println("join: "+String.join("-",joinArr));
+        // Iterable join
+        List<String> collect = Arrays.stream(joinArr).collect(Collectors.toList());
+        System.out.println("join Iterable: "+String.join("-",collect));
+
     }
 
     /**
