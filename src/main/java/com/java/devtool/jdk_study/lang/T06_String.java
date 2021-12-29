@@ -1,5 +1,7 @@
 package com.java.devtool.jdk_study.lang;
 
+import com.java.devtool.stream.model.User;
+
 import javax.xml.transform.Source;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -277,6 +279,20 @@ public class T06_String {
         format=String.format("Hi,%s", "Lewis");
         System.out.println(format);
 
+        // toString
+        System.out.println("valueOf:"+String.valueOf(new User()));
+
+        /**
+         * 一系列的copyValueOf就是返回一个新的字符串而已
+         */
+        char[] chars2=new char[]{'a','b'};
+        System.out.println("copyValueOf:"+String.copyValueOf(chars2));
+
+
+        /**
+         * intern要结合虚拟机知识
+         */
+        System.out.println("s".intern());
 
     }
 
