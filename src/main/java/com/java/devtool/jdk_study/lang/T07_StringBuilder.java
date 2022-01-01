@@ -15,10 +15,12 @@ public class T07_StringBuilder {
      */
     public static void main(String[] args) {
     //    testConstructorMethodOfStringBuilder();
-        testCommonApi("StringBuilder:");
+        testAppendApi("StringBuilder:");
+        StringBuilder test=new StringBuilder("");
     }
 
-    public static void testCommonApi(String str){
+    public static void testAppendApi(String str){
+        // StringBuilder只有到最后toString时才会创建String对象，而中途不断的append只是在常量池中存入这些字面量
         StringBuilder sb=new StringBuilder(str);
         /**
          * 总的来说：1.append方法就是像StringBuilder的尾部追加字符串，如果传入为null，那就在尾部插入"null"
@@ -61,6 +63,12 @@ public class T07_StringBuilder {
          */
         sb=new StringBuilder(str);
         System.out.println(sb.append(false));
+
+        /**
+         * 方法追加码点codePoint 参数到此序列的字符串表示形式。该参数被附加到这个序列中的内容。
+         */
+        sb=new StringBuilder(str);
+        System.out.println(sb.appendCodePoint(67));
 
     }
     public static void testConstructorMethodOfStringBuilder(){
