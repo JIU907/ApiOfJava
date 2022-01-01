@@ -15,8 +15,23 @@ public class T07_StringBuilder {
      */
     public static void main(String[] args) {
     //    testConstructorMethodOfStringBuilder();
-        testAppendApi("StringBuilder:");
-        StringBuilder test=new StringBuilder("");
+    //     testAppendApi("StringBuilder:");
+        testCommonApi("StringBuilder:");
+    }
+
+    public static void testCommonApi(String str){
+        //    测试一些其他方法，such as：delete
+        StringBuilder sb=new StringBuilder(str);
+        /**
+         * 删除StringBuilder上[beginIndex,endIndex)上的字符
+         */
+        System.out.println(sb.delete(0, 1));
+
+        sb=new StringBuilder(str);
+        /**
+         * 删除StringBuilder指定位置上的字符
+         */
+        System.out.println(sb.deleteCharAt(0));
     }
 
     public static void testAppendApi(String str){
