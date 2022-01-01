@@ -14,9 +14,25 @@ public class T07_StringBuilder {
      * 主要操作：字符串中append,insert字符
      */
     public static void main(String[] args) {
-        StringBuilder stringBuilder = new StringBuilder();
+    //    testConstructorMethodOfStringBuilder();
+        testCommonApi("StringBuilder");
     }
 
+    public static void testCommonApi(String str){
+        StringBuilder sb=new StringBuilder(str);
+        /**
+         * 总的来说：1.append方法就是像StringBuilder的尾部追加字符串，如果传入为null，那就在尾部插入"null"
+         *         2.单个参数的方法可以接收所有CharSequence的子类
+         */
+        System.out.println(sb.append(str));
+
+        /**
+         * 入参为字符数组
+         */
+        sb=new StringBuilder(str);
+        char[] charArr=new char[]{'a','b','c'};
+        System.out.println(sb.append(charArr));
+    }
     public static void testConstructorMethodOfStringBuilder(){
         // 1.默认开辟16字节的数组，2.判断是否禁用了字符串压缩
         StringBuilder stringBuilder = new StringBuilder();
