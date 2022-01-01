@@ -15,7 +15,7 @@ public class T07_StringBuilder {
      */
     public static void main(String[] args) {
     //    testConstructorMethodOfStringBuilder();
-        testCommonApi("StringBuilder");
+        testCommonApi("StringBuilder:");
     }
 
     public static void testCommonApi(String str){
@@ -32,6 +32,36 @@ public class T07_StringBuilder {
         sb=new StringBuilder(str);
         char[] charArr=new char[]{'a','b','c'};
         System.out.println(sb.append(charArr));
+
+        /**
+         * arg: CharSequence
+         *      [begin,end)
+         * return: this
+         * 向StringBuilder的结尾处追加入参的子串
+         */
+        String testAppendSub="SubString";
+        sb=new StringBuilder(str);
+        System.out.println(sb.append(testAppendSub, 0, 3));
+
+
+        /**
+         * arg: char[]
+         *      int beginIndex
+         *      int length
+         * return: this+[char[index],char[index+length])
+         * 向StringBuilder的结尾处追加入参的子数组
+         */
+        charArr=new char[]{'a','b','c'};
+        sb=new StringBuilder(str);
+        System.out.println(sb.append(charArr, 0, 2));
+
+        /**
+         * append:Boolean
+         * 这里是举例一下：其实还可以传入：int，long，double，char and so on
+         */
+        sb=new StringBuilder(str);
+        System.out.println(sb.append(false));
+
     }
     public static void testConstructorMethodOfStringBuilder(){
         // 1.默认开辟16字节的数组，2.判断是否禁用了字符串压缩
