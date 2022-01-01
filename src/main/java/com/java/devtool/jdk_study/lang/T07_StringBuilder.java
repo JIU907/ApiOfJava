@@ -32,6 +32,12 @@ public class T07_StringBuilder {
          * 删除StringBuilder指定位置上的字符
          */
         System.out.println(sb.deleteCharAt(0));
+
+        sb=new StringBuilder(str);
+        /**
+         * 替换StringBuilder[beginIndex,endIndex)的字符为str
+         */
+        System.out.println(sb.replace(0, 2, "abc"));
     }
 
     public static void testAppendApi(String str){
