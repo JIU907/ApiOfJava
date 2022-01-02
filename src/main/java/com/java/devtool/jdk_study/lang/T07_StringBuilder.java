@@ -16,7 +16,24 @@ public class T07_StringBuilder {
     public static void main(String[] args) {
     //    testConstructorMethodOfStringBuilder();
     //     testAppendApi("StringBuilder:");
-        testCommonApi("StringBuilder:");
+    //     testCommonApi("StringBuilder:");
+        testInsertApi("StringBuilder:");
+    }
+
+
+    public static void testInsertApi(String str){
+        StringBuilder sb=new StringBuilder(str);
+        char[] insertArr=new char[]{'a','b','c'};
+        /**
+         * arg: index=>原StringBuilder的字符数组的下标位置
+         *             代表着在这位置之前插入元素
+         *      char[]=>要插入的数组
+         *      offset=>插入数组的开始下标
+         *              eg：如果输入0，就代表从'a'就开始取元素了
+         *                  如果输入1，就代表从'b'就开始取元素
+         *      len   =>要插入的数组长度
+         */
+        System.out.println(sb.insert(1, insertArr, 1, 2));
     }
 
     public static void testCommonApi(String str){
