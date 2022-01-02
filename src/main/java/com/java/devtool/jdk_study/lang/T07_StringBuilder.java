@@ -33,7 +33,32 @@ public class T07_StringBuilder {
          *                  如果输入1，就代表从'b'就开始取元素
          *      len   =>要插入的数组长度
          */
-        System.out.println(sb.insert(1, insertArr, 1, 2));
+        System.out.println(sb.insert(sb.length(), insertArr, 1, 2));
+
+        /**
+         * arg : offset: 原StringBuilder的字符数组的下标位置
+         *               代表着在这位置之前插入元素
+         *       Object: 在offset位置上插入元素
+         * ----------------------------------------------
+         * 类似的第二参数还可以是：char[],boolean,CharSequence,int,long,double,float
+         */
+        sb=new StringBuilder(str);
+        String insertStr="insertTest";
+        System.out.println(sb.insert(0, insertStr));
+
+        sb=new StringBuilder(str);
+        StringBuilder insertBuilder=new StringBuilder("insertTest");
+        /**
+         * arg : offset: 原StringBuilder的字符数组的下标位置
+         *               代表着在这位置之前插入元素
+         *       CharSequence: 要插入的元素
+         *       start: 要插入元素的开始位置
+         *       end: 要插入元素的结束位置
+         *       !!! [start,end)
+         */
+        System.out.println(sb.insert(sb.length(), insertBuilder, 1, 2));
+
+
     }
 
     public static void testCommonApi(String str){
