@@ -16,8 +16,8 @@ public class T07_StringBuilder {
     public static void main(String[] args) {
     //    testConstructorMethodOfStringBuilder();
     //     testAppendApi("StringBuilder:");
-    //     testCommonApi("StringBuilder:");
-        testInsertApi("StringBuilder:");
+        testCommonApi("StringBuilder:");
+    //     testInsertApi("StringBuilder:");
     }
 
 
@@ -80,6 +80,30 @@ public class T07_StringBuilder {
          * 替换StringBuilder[beginIndex,endIndex)的字符为str
          */
         System.out.println(sb.replace(0, 2, "abc"));
+
+        /**
+         * 从前往后寻找第一次出现的字符，如果不存在返回-1
+         */
+        sb=new StringBuilder(str);
+        System.out.println(sb.indexOf("i"));
+
+        /**
+         * arg: str: 要查找的字符串
+         *      fromIndex: 从StringBuilder的哪个下标开始往后查找
+         */
+        sb=new StringBuilder(str);
+        System.out.println(sb.indexOf("i",4));
+
+        /**
+         * 从后往前开始查找
+         * arg: str: 要查找的字符串
+         *      fromIndex: 从StringBuilder的哪个下标开始往前查找
+         */
+        sb=new StringBuilder(str);
+        System.out.println(sb.lastIndexOf("i"));
+        System.out.println(sb.lastIndexOf("i",9));
+
+
     }
 
     public static void testAppendApi(String str){
