@@ -11,9 +11,19 @@ public abstract class PayCenter {
         doProcessor();
         afterProcessor();
     }
-    public abstract void beforeProcessor();
+    public void beforeProcessor(){
+
+    }
+
+    // 1.验单
+    // 2.下单
+    // 3.结单
     public abstract void doProcessor();
-    public abstract void afterProcessor();
+
+
+    public  void afterProcessor(){
+
+    }
 
 
 }

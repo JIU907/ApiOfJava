@@ -8,7 +8,7 @@ package com.jiu907.api.designpatterns.paycenter;
 public class DesignThink {
     public static void main(String[] args) {
         /**
-         * 1.模版方法+观察者模式
+         * 1.模版方法+策略模式
          * 2.通过Spring的getBeanNamesForType获取所有的支付接口
          *   {@link org.springframework.context.support.AbstractApplicationContext#getBeanNamesForType(java.lang.Class<?>)}
          */
