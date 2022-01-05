@@ -20,6 +20,8 @@ import java.util.ServiceLoader;
  */
 @SpringBootApplication
 public class PayCenter implements ApplicationContextAware {
+
+    // 存储Spring上下文
     private static ApplicationContext ctx = null;
 
     public static void main(String[] args) {
@@ -32,6 +34,9 @@ public class PayCenter implements ApplicationContextAware {
     }
 
 
+    /**
+     * 将所有的PayModel封装为<beanName,Bean>的Map
+     */
     @Bean
     Map<String,AbstractPayModel> producerPayModel(){
         Map<String, AbstractPayModel> beansOfType = PayCenter.ctx.getBeansOfType(AbstractPayModel.class);

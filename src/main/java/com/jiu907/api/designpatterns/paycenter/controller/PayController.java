@@ -17,6 +17,10 @@ import java.util.Map;
 public class PayController {
     @Autowired
     private Map<String, AbstractPayModel> producerPayModel;
+
+    /**
+     * 请求支付2
+     */
     @PostMapping(path = "/pay")
     public Object requestPay(@RequestBody PayDto msg){
         AbstractPayModel aliPay = producerPayModel.get("aliPay");
