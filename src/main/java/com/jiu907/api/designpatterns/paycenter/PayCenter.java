@@ -17,7 +17,6 @@ import java.util.ServiceLoader;
  * @date: 2022/1/4
  */
 @SpringBootApplication
-@ComponentScan(basePackages = "com.jiu907.api.designpatterns.paycenter.paystrategy")
 public class PayCenter {
     public static void main(String[] args) {
         SpringApplication.run(PayCenter.class, args);
