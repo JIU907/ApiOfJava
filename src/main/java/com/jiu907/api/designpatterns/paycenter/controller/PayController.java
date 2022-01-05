@@ -1,7 +1,11 @@
 package com.jiu907.api.designpatterns.paycenter.controller;
 
 import com.jiu907.api.designpatterns.paycenter.model.PayDto;
+import com.jiu907.api.designpatterns.paycenter.paystrategy.AbstractPayModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @Author LeiLiMin
@@ -11,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/payController")
 public class PayController {
-
+    @Autowired
+    private Map<String, AbstractPayModel> producerPayModel;
     @PostMapping(path = "/pay")
     public Object requestPay(@RequestBody PayDto msg){
-        System.out.println(msg);
+        AbstractPayModel aliPay = producerPayModel.get("aliPay");
+        aliPay.payProcessor();
         return msg.getPayModel();
     }
 }
