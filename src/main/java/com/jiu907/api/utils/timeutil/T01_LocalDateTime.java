@@ -15,15 +15,7 @@ public class T01_LocalDateTime {
         Long second = LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
         // 2.获取毫秒数
         Long milliSecond = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        System.out.println(milliSecond.equals(System.currentTimeMillis())); //true
 
-
-        // [0,num);
-        for (int i = 0; i < 99999; i++) {
-            int i1 = ThreadLocalRandom.current().nextInt(4);
-            if(i1==0){
-                System.out.println("yes");
-                break;
-            }
-        }
     }
 }
