@@ -17,4 +17,8 @@ public class Box_Byte {
     public static void main(String[] args) {
 
     }
+
+    public static void testValueOfMethod(byte b){
+
+    }
 }
