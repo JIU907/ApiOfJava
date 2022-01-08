@@ -34,5 +34,14 @@ public class Box_Byte {
          * 将16进制表示的"A"转为10进制，以Byte的形式来存储
          */
         System.out.println(Byte.valueOf("A", 16));
+
+        // parseByte
+        /**
+         * 为什么将parseBye放在ValueOf中一起讲解呢？
+         *  因为：想要通过将String转为Byte的ValueOf()都是调用来该方法
+         *         =>目的是将字符串转位一个进制表示的Byte
+         *         =>返回的是一个基础数据类型的Byte
+         */
+        byte b1 = Byte.parseByte("1");
     }
 }
