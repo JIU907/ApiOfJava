@@ -24,7 +24,21 @@ public class Box_Byte {
          * 其实与ValueOf的原理一致，就是将输入的agr转为10进制数
          * arg: 可以是16进制数也可以是10进制数
          */
-        System.out.println(Byte.decode("0xA"));
+        Byte decode = Byte.decode("0xA");
+        System.out.println(decode);
+
+        /**
+         * 将Byte的值转为基础数值类型
+         */
+        byte byteValue = decode.byteValue();
+        short shortValue = decode.shortValue();
+        int intValue = decode.intValue();
+        long longValue = decode.longValue();
+        float floatValue = decode.floatValue();
+        double doubleValue = decode.doubleValue();
+
+
+
     }
 
     public static void testValueOfMethod(byte b){
