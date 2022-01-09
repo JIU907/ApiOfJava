@@ -37,7 +37,30 @@ public class Box_Byte {
         float floatValue = decode.floatValue();
         double doubleValue = decode.doubleValue();
 
+        String s = decode.toString();
 
+        /**
+         * Byte 的hashCode可以是返回一个： int(value)
+         */
+        System.out.println(decode.hashCode());
+
+        /**
+         * Byte的equals()的判断流程是
+         *      1.判断arg是否为Byte类型
+         *      2.this.value==arg.byteValue()
+         */
+        System.out.println(decode.equals((byte) 10));
+
+        /**
+         * return: this.value-arg.byteValue()
+         */
+        System.out.println(decode.compareTo((byte)1));
+
+        /**
+         * 将this.value转为无符号Int
+         * return: ((int) x) & 0xff;
+         */
+        System.out.println(Byte.toUnsignedInt((byte)-127));
 
     }
 
