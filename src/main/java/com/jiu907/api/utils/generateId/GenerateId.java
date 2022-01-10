@@ -1,4 +1,4 @@
-package com.jiu907.api.utils;
+package com.jiu907.api.utils.generateId;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,19 +50,4 @@ public class GenerateId {
 
     }
 
-    public static void redisImplements() {
-        /**
-         * redis实现细节
-         * local prefix=redis.call('srandmember',KEYS[1],ARGV[1]);
-         * if(type(prefix) == 'number') then
-         *   return prefix;
-         * end;
-         * return -1
-         *
-         *
-         *
-         *
-         */
-//  * local prefix=redis.call('srandmember',KEYS[1],ARGV[1]);if(type(prefix) == 'number') then return prefix;end;return -1
-    }
 }
