@@ -1,8 +1,16 @@
 package com.jiu907.api.utils.generateId;
 
+import org.apache.maven.project.ProjectSorter;
+import redis.clients.jedis.Jedis;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -18,6 +26,10 @@ public class GenerateId {
     public static List<Integer> idList = new ArrayList<>();
 
     public static void main(String[] args) {
+        System.out.println(useLua());
+    }
+
+    public static void useJava() {
         // 1.生产有序集合
         for (int i = 0; i < 1000; i++) {
             prefixList.add(i);
@@ -50,4 +62,22 @@ public class GenerateId {
 
     }
 
+    public static int useLua() {
+        File file = new File("/Users/leilimin/IDEA-MySpace/ApiOfJava/src/main/java/com/jiu907/api/utils/generateId/GenerateId.lua");
+        Long fileLength = file.length();
+        byte[] fileContent = new byte[fileLength.intValue()];
+        try {
+            FileInputStream in = new FileInputStream(file);
+            in.read(fileContent);
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String fileContentStr = new String(fileContent);
+        Jedis jedis = new Jedis("1.15.151.138", 6379);
+        jedis.auth("123456");
+        Object eval = jedis.eval(fileContentStr);
+        return Objects.isNull(eval) ? 0 : Integer.parseInt(eval.toString());
+    }
 }
