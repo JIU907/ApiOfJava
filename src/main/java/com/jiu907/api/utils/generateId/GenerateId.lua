@@ -9,6 +9,8 @@ redis.replicate_commands();
 local prefixPoolSize   = 5;
 -- ID池大小
 local idPoolSize       = 5;
+-- 最小位数,用100 ... 00 表示
+local minSize          = 100000;
 -- 当前前缀Key
 local currentPrefix_key='currentPrefix';
 -- 当前前缀池
@@ -40,7 +42,7 @@ if(type(idNumber)=='boolean') then
         return nil;
     end;
     redis.call('set',currentPrefix_key,currentPrefixValue);
-    for i=1,prefixPoolSize do
+    for i=1,idPoolSize do
         redis.call('sadd',idPool_key,i);
     end
     idNumber = redis.call('spop',idPool_key);
@@ -51,4 +53,4 @@ end
 currentPrefixValue = tonumber(currentPrefixValue);
 idNumber           = tonumber(idNumber);
 
-return currentPrefixValue*10000+idNumber;
+return currentPrefixValue*minSize+idNumber;
