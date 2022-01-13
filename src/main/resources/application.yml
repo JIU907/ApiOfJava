@@ -1,3 +1,11 @@
 #端口号
 server:
   port: 8080
+
+
+apple:
+  authKeysAdd: https://appleid.apple.com/auth/keys
+  ISS: https://appleid.apple.com
+  verifyReceiptSandboxURL: https://sandbox.itunes.apple.com/verifyReceipt
+  verifyReceiptURL: https://buy.itunes.apple.com/verifyReceipt
+

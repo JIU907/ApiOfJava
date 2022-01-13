@@ -1,6 +1,7 @@
 package com.jiu907.api.designpatterns.paycenter.paystrategy;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.BasicJsonParser;
 import org.springframework.stereotype.Component;
 
@@ -42,18 +43,21 @@ public class ApplePay extends AbstractPayModel {
         }
     }
 
-
     // 沙箱地址
-    private static final String url_sandbox = "https://sandbox.itunes.apple.com/verifyReceipt";
+    @Value("${apple.verifyReceiptSandboxURL}")
+    private String url_sandbox;
+
     // 正式服地址
-    private static final String url_verify = "https://buy.itunes.apple.com/verifyReceipt";
+    @Value("${apple.verifyReceiptURL}")
+    private String url_verify;
+
 
     @Override
     protected void doProcessor() {
 
     }
 
-    public static String buyAppVerify(String receipt, int type) {
+    public String buyAppVerify(String receipt, int type) {
         //环境判断 线上/开发环境用不同的请求链接
         String url = "";
         if (type == 0) {
@@ -98,7 +102,7 @@ public class ApplePay extends AbstractPayModel {
         BasicJsonParser jsonParser = new BasicJsonParser();
 
         // 1.线上环境验证
-        String verifyResult = ApplePay.buyAppVerify(payload, 1);
+        String verifyResult = buyAppVerify(payload, 1);
         if (verifyResult == null) {
             throw new RuntimeException("Apple Pay,Return Null Json");
         }
@@ -107,7 +111,7 @@ public class ApplePay extends AbstractPayModel {
         String states = verifyMap.get("status").toString();
         // 2.沙箱环境验证
         if ("21007".equals(states)) {
-            verifyResult = ApplePay.buyAppVerify(payload, 0);
+            verifyResult = buyAppVerify(payload, 0);
             verifyMap = jsonParser.parseMap(verifyResult);
             states = verifyMap.get("status").toString();
         }
