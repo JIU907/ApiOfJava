@@ -2,7 +2,7 @@ package com.jiu907.api.designpatterns.paycenter.paystrategy;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.boot.json.BasicJsonParser;
-import org.springframework.boot.json.JsonParser;
+import org.springframework.stereotype.Component;
 
 import javax.net.ssl.*;
 import java.io.BufferedOutputStream;
@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.http.HttpClient;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Locale;
@@ -21,6 +20,7 @@ import java.util.Map;
  * @Description: 苹果支付
  * @date: 2022/1/12
  */
+@Component(value = "applePay")
 public class ApplePay extends AbstractPayModel {
 
     private static class TrustAnyTrustManager implements X509TrustManager {
@@ -32,7 +32,7 @@ public class ApplePay extends AbstractPayModel {
         }
 
         public X509Certificate[] getAcceptedIssuers() {
-            return new X509Certificate[] {};
+            return new X509Certificate[]{};
         }
     }
 
@@ -53,18 +53,18 @@ public class ApplePay extends AbstractPayModel {
 
     }
 
-    public static String buyAppVerify(String receipt,int type) {
+    public static String buyAppVerify(String receipt, int type) {
         //环境判断 线上/开发环境用不同的请求链接
         String url = "";
-        if(type==0){
+        if (type == 0) {
             url = url_sandbox; //沙盒测试
-        }else{
+        } else {
             url = url_verify; //线上测试
         }
 
         try {
             SSLContext sc = SSLContext.getInstance("SSL");
-            sc.init(null, new TrustManager[] { new TrustAnyTrustManager() }, new java.security.SecureRandom());
+            sc.init(null, new TrustManager[]{new TrustAnyTrustManager()}, new java.security.SecureRandom());
             URL console = new URL(url);
             HttpsURLConnection conn = (HttpsURLConnection) console.openConnection();
             conn.setSSLSocketFactory(sc.getSocketFactory());
@@ -87,51 +87,40 @@ public class ApplePay extends AbstractPayModel {
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
             }
-
             return sb.toString();
         } catch (Exception ex) {
-            System.out.println("苹果服务器异常");
-            ex.printStackTrace();
+            throw new RuntimeException("Apple Pay Request Fail");
         }
-        return null;
     }
 
-    public static String getBASE64(String str) {
-        byte[] b = str.getBytes();
-        String s = null;
-        if (b != null) {
-            s=new String(Base64.decodeBase64(b));
-        }
-        return s;
-    }
 
-    public Boolean iosPay(Long priceId, String transactionId, String payload) {
-        System.out.println("苹果内购校验开始，交易ID：" + transactionId + " base64校验体：" + payload);
+    public Boolean iosPay(String payload) {
         BasicJsonParser jsonParser = new BasicJsonParser();
 
-        //线上环境验证
+        // 1.线上环境验证
         String verifyResult = ApplePay.buyAppVerify(payload, 1);
         if (verifyResult == null) {
-            throw new RuntimeException("苹果验证失败，返回数据为空");
-        } else {
-            System.out.println("线上，苹果平台返回JSON:" + verifyResult);
-            Map<String, Object> verifyMap = jsonParser.parseMap(verifyResult);
-            String states = verifyMap.get("status").toString();
-            //无数据则沙箱环境验证
-            if ("21007".equals(states)) {
-                verifyResult = ApplePay.buyAppVerify(payload, 0);
-                System.out.println("沙盒环境，苹果平台返回JSON:" + verifyResult);
-                verifyMap = jsonParser.parseMap(verifyResult);
-                states = verifyMap.get("status").toString();
-            }
-            System.out.println("苹果平台返回值：appleReturn" + verifyMap);
-            // 前端所提供的收据是有效的    验证成功
-            if (states.equals("0")) {
-                return true;
-            } else {
-                throw new RuntimeException("支付失败，错误码：" + states);
-            }
+            throw new RuntimeException("Apple Pay,Return Null Json");
         }
+
+        Map<String, Object> verifyMap = jsonParser.parseMap(verifyResult);
+        String states = verifyMap.get("status").toString();
+        // 2.沙箱环境验证
+        if ("21007".equals(states)) {
+            verifyResult = ApplePay.buyAppVerify(payload, 0);
+            verifyMap = jsonParser.parseMap(verifyResult);
+            states = verifyMap.get("status").toString();
+        }
+
+        // 3.结果校验
+        if (states.equals("0")) {
+            // 业务逻辑校验
+            verifyMap = (Map<String, Object>) verifyMap.get("receipt");
+            return true;
+        } else {
+            throw new RuntimeException("支付失败，错误码：" + states);
+        }
+
     }
 
 }
