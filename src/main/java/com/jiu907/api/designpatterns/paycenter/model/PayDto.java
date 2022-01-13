@@ -14,7 +14,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PayDto {
     /**
-     * 0.AliPay
+     * 支付方式
      */
-    private Integer payModel;
+    private String payModel;
+
+    /**
+     * 三方验签信息
+     */
+    private String extra;
 }

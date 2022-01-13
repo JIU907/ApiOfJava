@@ -53,8 +53,8 @@ public class ApplePay extends AbstractPayModel {
 
 
     @Override
-    protected void doProcessor() {
-
+    protected void doProcessor(String payload) {
+        iosPay(payload);
     }
 
     public String buyAppVerify(String receipt, int type) {

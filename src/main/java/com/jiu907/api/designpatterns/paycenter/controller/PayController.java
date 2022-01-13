@@ -23,8 +23,8 @@ public class PayController {
      */
     @PostMapping(path = "/pay")
     public Object requestPay(@RequestBody PayDto msg){
-        AbstractPayModel aliPay = producerPayModel.get("aliPay");
-        aliPay.payProcessor();
+        AbstractPayModel aliPay = producerPayModel.get(msg.getPayModel());
+        aliPay.payProcessor(msg.getExtra());
         return msg.getPayModel();
     }
 }

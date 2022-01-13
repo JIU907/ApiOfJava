@@ -1,5 +1,8 @@
 package com.jiu907.api.designpatterns.paycenter.paystrategy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Author LeiLiMin
  * @Description: 支付策略顶级父类
@@ -7,24 +10,27 @@ package com.jiu907.api.designpatterns.paycenter.paystrategy;
  * @date: 2022/1/4
  */
 public abstract class AbstractPayModel {
-
+    /**
+     * 存储实际上下文
+     */
+    public Map<String,Object> contextMap=new HashMap<>();
     /**
      * 支付行为的入口
      */
-    public void payProcessor(){
+    public void payProcessor(String payload){
         beforeProcessor();
-        doProcessor();
+        doProcessor(payload);
         afterProcessor();
     }
+
+    // 业务逻辑前置检查--可以为abstract
     protected void beforeProcessor(){
     }
 
-    /**
-     * 子类实现
-     */
-    protected abstract void doProcessor();
+    // 主逻辑
+    protected abstract void doProcessor(String payload);
 
-
+    // 业务逻辑后置检查--可以为abstract
     protected  void afterProcessor(){
 
     }

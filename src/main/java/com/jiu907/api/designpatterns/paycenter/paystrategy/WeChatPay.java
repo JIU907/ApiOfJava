@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class WeChatPay extends AbstractPayModel{
     @Override
-    public void doProcessor() {
+    public void doProcessor(String payload) {
 
     }
 }

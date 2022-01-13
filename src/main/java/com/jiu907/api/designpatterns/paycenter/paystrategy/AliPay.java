@@ -21,7 +21,7 @@ public class AliPay extends AbstractPayModel{
     }
 
     @Override
-    public void doProcessor() {
+    public void doProcessor(String payload) {
         System.out.println("Ali pay ！！！");
     }
 }
