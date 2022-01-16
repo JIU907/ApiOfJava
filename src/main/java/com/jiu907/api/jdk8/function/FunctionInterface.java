@@ -1,5 +1,7 @@
 package com.jiu907.api.jdk8.function;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
@@ -57,6 +59,8 @@ class testClass {
     public static void consumer(Integer arg, Consumer<Integer> consumer) {
         // accept: 使用传入的arg进行consumer定义的操作
         consumer.accept(arg);
+        // andThen: 对于同一个arg，先执行consumer的操作，再执行andThen入参中的consumer
+        consumer.andThen(m -> System.out.println("andThen")).accept(arg);
     }
 
     /**
@@ -75,8 +79,20 @@ class testClass {
     /**
      * 函数形接口: 有参数，有返回值
      */
+    @Test
     public static void function(String arg, Function<String, Integer> function) {
         System.out.println("function apply: " + function.apply(arg));
+
+        /**
+         * compose: 先执行f2，f2的返回值作为f1的arg继续执行
+         *          细节就是这个Function的arg和return要是同一种类型
+         */
+        Function<Integer,Integer> f1=i->Integer.parseInt("1")*2;
+        Function<Integer,Integer> f2=i->Integer.parseInt("1")+1;
+        System.out.println(f1.compose(f2).apply(1));
+
+        // andThen: 先执行f1，f1的返回值作为f2的arg继续执行
+        f1.andThen(f2).apply(1);
     }
 
     /**
