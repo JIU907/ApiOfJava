@@ -101,6 +101,13 @@
             <artifactId>okhttp</artifactId>
             <version>4.9.1</version>
         </dependency>
+
+            <!-- 引入神策分析 SDK -->
+            <dependency>
+                <groupId>com.sensorsdata.analytics.javasdk</groupId>
+                <artifactId>SensorsAnalyticsSDK</artifactId>
+                <version>3.4.0</version>
+            </dependency>
     </dependencies>
 
 </project>
