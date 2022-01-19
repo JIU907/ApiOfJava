@@ -2,18 +2,18 @@ package com.jiu907.api.verify.bi;
 
 import com.google.gson.Gson;
 import com.jiu907.api.verify.bi.utils.DefaultThreadFactory;
+import com.jiu907.api.verify.bi.utils.TraceUtil;
 import com.sensorsdata.analytics.javasdk.ISensorsAnalytics;
 import com.sensorsdata.analytics.javasdk.SensorsAnalytics;
 import com.sensorsdata.analytics.javasdk.bean.EventRecord;
 import com.sensorsdata.analytics.javasdk.consumer.ConcurrentLoggingConsumer;
-import com.sensorsdata.analytics.javasdk.consumer.DebugConsumer;
 import com.sensorsdata.analytics.javasdk.exceptions.InvalidArgumentException;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.plexus.util.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -38,7 +38,7 @@ public class SensorService {
     // 系统环境：生产环境
     private static String ENV_PRODUCT = "PRODUCT";
 
-    private static Gson gson=new Gson();
+    private static Gson gson = new Gson();
 
 
     static {
@@ -101,6 +101,7 @@ public class SensorService {
      * @param isLoginId  为true时distinctId是一个userId  false时是设备ID
      */
     public void track(String distinctId, String eventName, Map<String, Object> properties, boolean isLoginId) {
+        properties = this.addTraceId(eventName, properties);
         try {
             // 1.设置distinctId，eventName，isLoginId
             EventRecord build = EventRecord
@@ -116,6 +117,20 @@ public class SensorService {
         }
     }
 
+
+    /**
+     * 存入TraceId
+     * @param properties
+     * @return
+     */
+    private Map<String, Object> addTraceId(String eventName, Map<String, Object> properties) {
+        String traceId = TraceUtil.readTraceId();
+        if (StringUtils.isBlank(traceId)) {
+            traceId = TraceUtil.createTraceId();
+        }
+        properties.put(TraceConstants.TRACE_ID_SENSOR_KEY, traceId);
+        return properties;
+    }
 
     /**
      * 记录用户注册事件
@@ -135,19 +150,19 @@ public class SensorService {
     public static void main(String[] args) throws InvalidArgumentException {
         SensorService sensorService = new SensorService();
         // sensorService.trackSignUp("2", "1");
-        Map<String,Object> map=new HashMap<>();
-        List<String> list=new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+        List<String> list = new ArrayList<>();
         list.add("1");
         list.add("2");
-        map.put("age",list);
-        map.put("name","lewis");
-        map.put("int",1);
-        map.put("float",1.1f);
-        map.put("double",2.2D);
-        map.put("short",(short)1);
-        map.put("byte",(byte)1);
+        map.put("age", list);
+        map.put("name", "lewis");
+        map.put("int", 1);
+        map.put("float", 1.1f);
+        map.put("double", 2.2D);
+        map.put("short", (short) 1);
+        map.put("byte", (byte) 1);
         // map.put("char",(char)1); 行不通
 
-        sensorService.track("222","new_Method",map,false);
+        sensorService.track("222", "new_Method", map, false);
     }
 }
