@@ -1,6 +1,6 @@
 package com.jiu907.api.verify.bi;
 
-import com.google.gson.Gson;
+
 import com.jiu907.api.verify.bi.utils.DefaultThreadFactory;
 import com.jiu907.api.verify.bi.utils.TraceUtil;
 import com.sensorsdata.analytics.javasdk.ISensorsAnalytics;
@@ -37,9 +37,6 @@ public class SensorService {
 
     // 系统环境：生产环境
     private static String ENV_PRODUCT = "PRODUCT";
-
-    private static Gson gson = new Gson();
-
 
     static {
         scheduledExecutorService = new ScheduledThreadPoolExecutor(1, new DefaultThreadFactory("SensorsTask"));
