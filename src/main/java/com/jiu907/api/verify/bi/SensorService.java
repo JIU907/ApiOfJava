@@ -93,11 +93,13 @@ public class SensorService {
      * {@link List}，若属性包含 $time 字段，则它会覆盖事件的默认时间属性，该字段只接受{@link Date}类型
      *
      * @param distinctId 用户ID
-     * @param eventName  事件名称
+     * @param event      事件名称--顶级
+     * @param eventName  事件名称--次级
      * @param properties 事件的属性
      * @param isLoginId  为true时distinctId是一个userId  false时是设备ID
      */
-    public void track(String distinctId, String eventName, Map<String, Object> properties, boolean isLoginId) {
+    public void track(String distinctId,String event, String eventName, Map<String, Object> properties, boolean isLoginId) {
+        properties.put(TraceConstants.KEY_EVENT_NAME,eventName);
         properties = this.addTraceId(eventName, properties);
         try {
             // 1.设置distinctId，eventName，isLoginId
@@ -105,7 +107,7 @@ public class SensorService {
                     .builder()
                     .setDistinctId(distinctId)
                     .isLoginId(isLoginId)
-                    .setEventName(eventName)
+                    .setEventName(event)
                     .addProperties(properties).build();
             // 2.记录用户浏览商品事件
             sa.track(build);
@@ -143,10 +145,12 @@ public class SensorService {
             log.error(e.getMessage(), e);
         }
     }
-
+    // 需要将三级目录封装二级目录
     public static void main(String[] args) throws InvalidArgumentException {
         SensorService sensorService = new SensorService();
         // sensorService.trackSignUp("2", "1");
+        HashMap<Object, Object> subMap = new HashMap<>();
+        subMap.put("event_name","test");
         Map<String, Object> map = new HashMap<>();
         List<String> list = new ArrayList<>();
         list.add("1");
@@ -158,8 +162,9 @@ public class SensorService {
         map.put("double", 2.2D);
         map.put("short", (short) 1);
         map.put("byte", (byte) 1);
-        // map.put("char",(char)1); 行不通
+        map.put("dateMe", new Date());
+        // map.put("map",subMap);
 
-        sensorService.track("222", "new_Method", map, false);
+        // sensorService.track("222", "first_event","second_event", map, false);
     }
 }

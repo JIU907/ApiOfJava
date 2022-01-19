@@ -23,4 +23,6 @@ public interface TraceConstants {
      * 埋点key
      */
     String TRACE_ID_SENSOR_KEY = "trace_id";
+
+    String KEY_EVENT_NAME="event_name";
 }
