@@ -9,7 +9,7 @@ import com.sensorsdata.analytics.javasdk.bean.EventRecord;
 import com.sensorsdata.analytics.javasdk.consumer.ConcurrentLoggingConsumer;
 import com.sensorsdata.analytics.javasdk.exceptions.InvalidArgumentException;
 import lombok.extern.slf4j.Slf4j;
-import org.codehaus.plexus.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
@@ -23,8 +23,8 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class SensorService {
-    // 日志文件路径
-    private static final String LOG_FILE_PATH = "/Users/leilimin/sensors_log/";
+    // 日志文件：完全路径名称
+    private String LOG_FILE_NAME;
 
     // 生产数据的顶级接口对象
     public static ISensorsAnalytics sa;
@@ -38,33 +38,36 @@ public class SensorService {
     // 系统环境：生产环境
     private static String ENV_PRODUCT = "PRODUCT";
 
+    // 系统环境
+    private String env = System.getenv("ENV");
+
+    // 系统变量中的log缓冲区大小
+    private static final int LOG_BUFFER_SIZE = Integer.parseInt(StringUtils.isBlank(System.getenv("LOG_BUFFER_SIZE")) ? "0" : System.getenv("LOG_BUFFER_SIZE"));
+
+
     static {
         scheduledExecutorService = new ScheduledThreadPoolExecutor(1, new DefaultThreadFactory("SensorsTask"));
     }
 
-    public SensorService() {
-        String env = System.getenv("ENV");
-        if (ENV_DEV.equals(env)) {
-            /**
-             * 开发环境：该模式会逐条校验数据并在校验失败时抛出异常
-             * serverUrl: 数据接收地址数据是否入库，
-             * writeData: true:表示数据入库；false:表示数据不入库（只展示不保存）
-             */
-            this.sa = new SensorsAnalytics(new ConcurrentLoggingConsumer(LOG_FILE_PATH));
-        }
+    public SensorService(String fileName) {
+        // 1.创建文件名
+        this.LOG_FILE_NAME = SensorsConstants.LOG_FILE_PATH + fileName;
+
+        // 2.数据生产类
+        this.sa = new SensorsAnalytics(new ConcurrentLoggingConsumer(this.LOG_FILE_NAME, LOG_BUFFER_SIZE));
+
+        // 3.如果是生产环境，就创建一个定时任务去flush buffer
         if (ENV_PRODUCT.equals(env)) {
             /**
              * 生产环境: 使用 ConcurrentLoggingConsumer导入数据。
              *          支持多个进程写同一个目录（目录不能是 nas、nfs 类文件系统）
              */
-            this.sa = new SensorsAnalytics(new ConcurrentLoggingConsumer(LOG_FILE_PATH));
-            // 每隔 5 分钟定时 flush 一下，解决某个服务埋点量少，flush 不及时的问题
             scheduledExecutorService.scheduleAtFixedRate(() -> {
                 this.sa.flush();
             }, 1L, 5L, TimeUnit.MINUTES);
         }
 
-        // 为JVM增加一个Hook，当Jvm退出时，让consumer及时flush
+        // 4.为JVM增加一个Hook，当Jvm退出时，让consumer及时flush
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 Optional.ofNullable(sa).ifPresent(sa -> sa.shutdown());
@@ -98,8 +101,8 @@ public class SensorService {
      * @param properties 事件的属性
      * @param isLoginId  为true时distinctId是一个userId  false时是设备ID
      */
-    public void track(String distinctId,String event, String eventName, Map<String, Object> properties, boolean isLoginId) {
-        properties.put(TraceConstants.KEY_EVENT_NAME,eventName);
+    public void track(String distinctId, String event, String eventName, Map<String, Object> properties, boolean isLoginId) {
+        properties.put(SensorsConstants.KEY_EVENT_NAME, eventName);
         properties = this.addTraceId(eventName, properties);
         try {
             // 1.设置distinctId，eventName，isLoginId
@@ -119,6 +122,7 @@ public class SensorService {
 
     /**
      * 存入TraceId
+     *
      * @param properties
      * @return
      */
@@ -127,7 +131,7 @@ public class SensorService {
         if (StringUtils.isBlank(traceId)) {
             traceId = TraceUtil.createTraceId();
         }
-        properties.put(TraceConstants.TRACE_ID_SENSOR_KEY, traceId);
+        properties.put(SensorsConstants.TRACE_ID_SENSOR_KEY, traceId);
         return properties;
     }
 
@@ -145,26 +149,31 @@ public class SensorService {
             log.error(e.getMessage(), e);
         }
     }
+
     // 需要将三级目录封装二级目录
     public static void main(String[] args) throws InvalidArgumentException {
-        SensorService sensorService = new SensorService();
+        SensorService sensorService = new SensorService("api of java");
         // sensorService.trackSignUp("2", "1");
-        HashMap<Object, Object> subMap = new HashMap<>();
-        subMap.put("event_name","test");
-        Map<String, Object> map = new HashMap<>();
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        map.put("age", list);
-        map.put("name", "lewis");
-        map.put("int", 1);
-        map.put("float", 1.1f);
-        map.put("double", 2.2D);
-        map.put("short", (short) 1);
-        map.put("byte", (byte) 1);
-        map.put("dateMe", new Date());
+        // HashMap<Object, Object> subMap = new HashMap<>();
+        // subMap.put("event_name", "test");
+        // Map<String, Object> map = new HashMap<>();
+        // List<String> list = new ArrayList<>();
+        // list.add("1");
+        // list.add("2");
+        // map.put("age", list);
+        // map.put("name", "lewis");
+        // map.put("int", 1);
+        // map.put("float", 1.1f);
+        // map.put("double", 2.2D);
+        // map.put("short", (short) 1);
+        // map.put("byte", (byte) 1);
+        // map.put("dateMe", new Date());
         // map.put("map",subMap);
+        // Optional.of("").ifPresent();
+        // sensorService.track("222", "first_event", "second_event", map, false);
+        while(true){
+         System.out.println(UUID.randomUUID());
+        }
 
-        // sensorService.track("222", "first_event","second_event", map, false);
     }
 }
