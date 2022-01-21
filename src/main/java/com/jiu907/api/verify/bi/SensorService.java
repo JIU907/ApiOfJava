@@ -54,8 +54,9 @@ public class SensorService {
         this.LOG_FILE_NAME = SensorsConstants.LOG_FILE_PATH + fileName;
 
         // 2.数据生产类
-        this.sa = new SensorsAnalytics(new ConcurrentLoggingConsumer(this.LOG_FILE_NAME, LOG_BUFFER_SIZE));
-
+        if (Objects.isNull(sa)) {
+            sa = new SensorsAnalytics(new ConcurrentLoggingConsumer(this.LOG_FILE_NAME, LOG_BUFFER_SIZE));
+        }
         // 3.如果是生产环境，就创建一个定时任务去flush buffer
         if (ENV_PRODUCT.equals(env)) {
             /**
