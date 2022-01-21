@@ -9,3 +9,6 @@ apple:
   verifyReceiptSandboxURL: https://sandbox.itunes.apple.com/verifyReceipt
   verifyReceiptURL: https://buy.itunes.apple.com/verifyReceipt
 
+spring:
+  application:
+    name: apiOfJava
