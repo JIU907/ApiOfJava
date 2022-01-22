@@ -26,7 +26,7 @@ public class GenerateId {
     public static List<Integer> idList = new ArrayList<>();
 
     public static void main(String[] args) {
-        System.out.println(useLua());
+        // System.out.println(useLua());
     }
 
     public static void useJava() {
@@ -62,22 +62,5 @@ public class GenerateId {
 
     }
 
-    public static int useLua() {
-        File file = new File("/Users/leilimin/IDEA-MySpace/ApiOfJava/src/main/java/com/jiu907/api/utils/generateId/GenerateId.lua");
-        Long fileLength = file.length();
-        byte[] fileContent = new byte[fileLength.intValue()];
-        try {
-            FileInputStream in = new FileInputStream(file);
-            in.read(fileContent);
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        String fileContentStr = new String(fileContent);
-        Jedis jedis = new Jedis("1.15.151.138", 6379);
-        jedis.auth("123456");
-        Object eval = jedis.eval(fileContentStr);
-        return Objects.isNull(eval) ? 0 : Integer.parseInt(eval.toString());
-    }
 }
