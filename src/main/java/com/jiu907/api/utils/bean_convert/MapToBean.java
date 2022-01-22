@@ -1,6 +1,6 @@
 package com.jiu907.api.utils.bean_convert;
 
-import com.jiu907.api.stream.model.User;
+import com.jiu907.api.jdk8.stream.model.User;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.util.HashMap;

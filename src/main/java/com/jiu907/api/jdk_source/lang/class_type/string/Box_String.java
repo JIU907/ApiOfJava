@@ -1,6 +1,6 @@
 package com.jiu907.api.jdk_source.lang.class_type.string;
 
-import com.jiu907.api.stream.model.User;
+import com.jiu907.api.jdk8.stream.model.User;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;

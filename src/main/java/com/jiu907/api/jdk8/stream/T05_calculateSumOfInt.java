@@ -1,4 +1,4 @@
-package com.jiu907.api.stream;
+package com.jiu907.api.jdk8.stream;
 
 import java.util.ArrayList;
 import java.util.List;

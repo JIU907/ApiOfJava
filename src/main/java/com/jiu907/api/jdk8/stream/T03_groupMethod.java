@@ -1,6 +1,6 @@
-package com.jiu907.api.stream;
+package com.jiu907.api.jdk8.stream;
 
-import com.jiu907.api.stream.model.User;
+import com.jiu907.api.jdk8.stream.model.User;
 
 import java.util.List;
 import java.util.Map;

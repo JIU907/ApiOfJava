@@ -1,4 +1,4 @@
-package com.jiu907.api.stream.model;
+package com.jiu907.api.jdk8.stream.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
