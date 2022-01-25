@@ -1,0 +1,4 @@
+## 删除提交历史
+$ git log
+$ git reset --hard commit-hash
+$ git push origin HEAD --force
