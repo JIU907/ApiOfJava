@@ -42,4 +42,9 @@ public class PayCenter implements ApplicationContextAware {
         Map<String, AbstractPayModel> beansOfType = PayCenter.ctx.getBeansOfType(AbstractPayModel.class);
         return beansOfType;
     }
+
+    public AbstractPayModel getPayBeanByName(String beanName){
+        AbstractPayModel bean =(AbstractPayModel)PayCenter.ctx.getBean(beanName);
+        return bean;
+    }
 }
