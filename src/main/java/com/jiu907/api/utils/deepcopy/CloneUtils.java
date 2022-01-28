@@ -1,4 +1,4 @@
-package com.jiu907.api.springboot.utils.deepcopy;
+package com.jiu907.api.utils.deepcopy;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

@@ -1,4 +1,4 @@
-package com.jiu907.api.springboot.utils.generateId;
+package com.jiu907.api.utils.generateId;
 
 import java.util.ArrayList;
 import java.util.HashSet;

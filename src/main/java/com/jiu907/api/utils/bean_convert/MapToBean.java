@@ -1,4 +1,4 @@
-package com.jiu907.api.springboot.utils.bean_convert;
+package com.jiu907.api.utils.bean_convert;
 
 import com.jiu907.api.jdk8.stream.model.User;
 import org.apache.commons.beanutils.BeanUtils;

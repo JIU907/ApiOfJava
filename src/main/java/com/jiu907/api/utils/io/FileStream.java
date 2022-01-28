@@ -1,4 +1,4 @@
-package com.jiu907.api.springboot.utils.io;
+package com.jiu907.api.utils.io;
 
 import java.io.File;
 import java.io.FileInputStream;

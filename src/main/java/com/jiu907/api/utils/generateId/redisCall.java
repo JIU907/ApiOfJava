@@ -1,7 +1,7 @@
-package com.jiu907.api.springboot.utils.generateId;
+package com.jiu907.api.utils.generateId;
 
-import com.jiu907.api.springboot.utils.io.FileStream;
-import com.jiu907.api.springboot.utils.redisclient.RedisClientService;
+import com.jiu907.api.utils.io.FileStream;
+import com.jiu907.api.utils.redisclient.RedisClientService;
 
 import java.util.ArrayList;
 

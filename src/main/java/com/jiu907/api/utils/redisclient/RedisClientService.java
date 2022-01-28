@@ -1,4 +1,4 @@
-package com.jiu907.api.springboot.utils.redisclient;
+package com.jiu907.api.utils.redisclient;
 
 import redis.clients.jedis.Jedis;
 

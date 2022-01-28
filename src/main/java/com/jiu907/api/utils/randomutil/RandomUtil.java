@@ -1,4 +1,4 @@
-package com.jiu907.api.springboot.utils.randomutil;
+package com.jiu907.api.utils.randomutil;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
