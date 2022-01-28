@@ -1,4 +1,4 @@
-package com.jiu907.api.springboot.paycenter.model;
+package com.jiu907.api.springboot.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

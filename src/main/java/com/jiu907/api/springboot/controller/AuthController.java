@@ -1,6 +1,6 @@
-package com.jiu907.api.springboot.paycenter.controller;
+package com.jiu907.api.springboot.controller;
 
-import com.jiu907.api.springboot.paycenter.model.PayDto;
+import com.jiu907.api.springboot.model.PayDto;
 import com.jiu907.api.springboot.paycenter.paystrategy.AbstractPayModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +10,12 @@ import java.util.Map;
 
 /**
  * @Author LeiLiMin
- * @Description: 模拟请求支付的Controller
+ * @Description: 权限Controller
  * @date: 2022/1/5
  */
 @RestController
-@RequestMapping("/payController")
-public class PayController {
+@RequestMapping("/authController")
+public class AuthController {
     @Autowired
     private Map<String, AbstractPayModel> producerPayModel;
 
