@@ -1,12 +1,7 @@
 package com.jiu907.api.springboot.controller;
 
-import com.jiu907.api.springboot.model.PayDto;
-import com.jiu907.api.springboot.paycenter.paystrategy.AbstractPayModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author LeiLiMin
@@ -14,19 +9,9 @@ import java.util.Map;
  * @date: 2022/1/5
  */
 @RestController
-@RequestMapping("/authController")
+@RequestMapping("/v1/authController")
 public class AuthController {
-    @Autowired
-    private Map<String, AbstractPayModel> producerPayModel;
-
     /**
-     * 请求支付2
+     * 设计一个登录服务
      */
-    @PostMapping(path = "/pay")
-    public Object requestPay(HttpServletRequest hp,@RequestBody PayDto msg){
-        AbstractPayModel aliPay = producerPayModel.get(msg.getPayModel());
-        aliPay.payProcessor(msg.getExtra());
-        return msg.getPayModel();
-
-    }
 }
