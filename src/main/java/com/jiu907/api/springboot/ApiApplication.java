@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @Author LeiLiMin
- * @Description: 支付中心设计模式构思
+ * @Description: Spring模块启动类
  * @date: 2022/1/4
  */
 @SpringBootApplication
