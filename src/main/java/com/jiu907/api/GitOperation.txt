@@ -19,4 +19,4 @@ git commit --amend  # 重新提交
                    	# 如果当前的暂存区与上次提交相比发生了变化，就相当与此提交命令会修正上一次的提交
 
 ## 补充提交
-git commit --date="Feb 3  9:05:20 2021 +0800" -am "test-补充提交"
+git commit --date="Feb 3  9:05:20 2022 +0800" -am "test-补充提交"
