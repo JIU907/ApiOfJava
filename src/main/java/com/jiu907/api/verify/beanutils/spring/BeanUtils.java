@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @Author LeiLiMin
- * @Description:
+ * @Description: Spring Bean Utils
  * @date: 2022/1/17
  */
 public class BeanUtils {
