@@ -2,3 +2,8 @@
 $ git log
 $ git reset --hard commit-hash
 $ git push origin HEAD --force
+
+## 修改远程仓库
+$ git remote -v
+$ git remote rm origin
+$ git remote add origin  git@github.com:Lewis-lei/ApiOfJava.git
