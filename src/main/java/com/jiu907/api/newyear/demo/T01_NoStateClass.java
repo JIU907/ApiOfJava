@@ -1,6 +1,7 @@
 package com.jiu907.api.newyear.demo;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @Author LeiLiMin
@@ -28,10 +29,22 @@ public class T01_NoStateClass {
      * 并非线程安全--
      * a++: 并发原子操作
      * 该对象可能被并发访问
+     *
      * @return
      */
     public int increaseA() {
         this.a++;
         return this.a;
+    }
+
+    private AtomicInteger atomicA = new AtomicInteger(0);
+
+    /**
+     * 打破了竞态条件--
+     * 累加操作是原子的
+     * @return
+     */
+    public int increaseAtomicA() {
+        return this.atomicA.incrementAndGet();
     }
 }
