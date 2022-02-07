@@ -1,4 +1,4 @@
-package com.jiu907.api.juc.demo.chaptertwo;
+package com.jiu907.api.juc.demo.chapter2;
 
 import java.util.concurrent.atomic.AtomicReference;
 
