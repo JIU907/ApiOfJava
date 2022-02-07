@@ -1,4 +1,4 @@
-package com.jiu907.api.juc.demo;
+package com.jiu907.api.juc.demo.chaptertwo;
 
 /**
  * @Author LeiLiMin
