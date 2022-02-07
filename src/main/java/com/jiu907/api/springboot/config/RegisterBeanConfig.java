@@ -1,6 +1,6 @@
 package com.jiu907.api.springboot.config;
 
-import com.jiu907.api.verify.bi.SensorService;
+import com.jiu907.api.verify.sensorsbi.SensorService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

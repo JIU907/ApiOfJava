@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 /**
  * @Author LeiLiMin
- * @Description: getRandomFromWeigh
+ * @Description: 根据权重随机取数
  * @date: 2021/12/16
  */
 @Data
