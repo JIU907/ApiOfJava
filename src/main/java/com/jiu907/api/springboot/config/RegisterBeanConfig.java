@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @Author LeiLiMin
- * @Description: Bean的注册中心
+ * @Description: 注册Bean
  * @date: 2022/1/30
  */
 @Configuration

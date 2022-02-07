@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @Author LeiLiMin
- * @Description: 自定义Spring上下文对象
+ * @Description: 获取Bean
  * @date: 2022/1/28
  */
 @Configuration
