@@ -9,7 +9,8 @@ import java.util.Optional;
  */
 public class T02_Optional {
     public static void main(String[] args) {
-        of();
+        // of();
+        get();
     }
 
     /**
@@ -27,5 +28,12 @@ public class T02_Optional {
         } catch (Exception e) {
             System.out.println("x error");
         }
+    }
+
+    private static void get(){
+        Long numA = 1L;
+        Long getNum = Optional.of(numA).get();
+        System.out.println(getNum);
+
     }
 }
