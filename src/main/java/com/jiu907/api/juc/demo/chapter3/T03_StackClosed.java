@@ -9,7 +9,7 @@ import java.util.*;
  * @Description: 线程封闭
  * @date: 2022/2/9
  */
-public class T04_StackClosed {
+public class T03_StackClosed {
     /**
      * 栈封闭：
      * 1.count是局部变量，以线程的角度，封闭在自己的局部变量表中，无法被其他线程获取到
