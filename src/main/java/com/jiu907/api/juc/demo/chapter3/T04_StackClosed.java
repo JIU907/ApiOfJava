@@ -24,4 +24,17 @@ public class T04_StackClosed {
             userSet.add(users.get(i));
         }
     }
+
+    /**
+     * ThreadLocal:
+     * 当单个线程独享这份变量副本
+     */
+    ThreadLocal<User> currentUser;
+
+    public void setCurrentUser(User user){
+        this.currentUser.set(user);
+    }
+    public User getCurrentUser(){
+        return currentUser.get();
+    }
 }
