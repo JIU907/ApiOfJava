@@ -14,11 +14,12 @@ public class T04_StackClosed {
      * 栈封闭：
      * 1.count是局部变量，以线程的角度，封闭在自己的局部变量表中，无法被其他线程获取到
      * 2.userSet也封闭在了局部变量表中，但是其内部的User对象仍然会被其他线程修改
+     *
      * @param users
      */
     public void loadTheArk(List<User> users) {
         int count = 0;
-        Set<User> userSet=new HashSet<>();
+        Set<User> userSet = new HashSet<>();
         for (int i = 0; i < users.size(); i++) {
             count++;
             userSet.add(users.get(i));
@@ -31,10 +32,19 @@ public class T04_StackClosed {
      */
     ThreadLocal<User> currentUser;
 
-    public void setCurrentUser(User user){
+    public void setCurrentUser(User user) {
         this.currentUser.set(user);
     }
-    public User getCurrentUser(){
+
+    public User getCurrentUser() {
         return currentUser.get();
     }
+
+    /**
+     * USER对象并不是不可变对象，其内部的Address仍然会被改变
+     * NUM对象不可变
+     */
+    public static final User USER = new User();
+    public static final int NUM = 1;
+
 }

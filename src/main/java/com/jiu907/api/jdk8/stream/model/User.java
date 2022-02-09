@@ -19,13 +19,23 @@ public class User {
     private Integer age;
     private Boolean sex;
     private String name;
+    private Address add;
 
-    public static List<User> getUsers(){
-        List<User> list=new ArrayList<>();
-        list.add(new User(1,true,"Lewis"));
-        list.add(new User(2,false,"Lucy"));
-        list.add(new User(3,true,"Mike"));
-        list.add(new User(4,false,"Lily"));
+    public static List<User> getUsers() {
+        List<User> list = new ArrayList<>();
+        list.add(new User(1, true, "Lewis", new Address()));
+        list.add(new User(2, false, "Lucy", new Address()));
+        list.add(new User(3, true, "Mike", new Address()));
+        list.add(new User(4, false, "Lily", new Address()));
         return list;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Address {
+        private String province;
+        private String city;
+        private String county;
     }
 }
