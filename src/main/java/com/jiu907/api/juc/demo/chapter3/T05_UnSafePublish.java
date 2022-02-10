@@ -62,3 +62,22 @@ class Holder {
         }
     }
 }
+
+/**
+ * 这个Holder就是不可变对象
+ * 以为n一旦赋值就不可修改，所以this.n不会出现不一致的情况
+ * 所以即使Holder被不安全的发布，也是安全的
+ */
+class SafeHolder {
+    private final int n;
+
+    public SafeHolder(int n) {
+        this.n = n;
+    }
+
+    public void assertSanity() {
+        if (this.n != this.n) {
+            throw new RuntimeException("unsafe publish");
+        }
+    }
+}
