@@ -26,6 +26,11 @@ public class T04_VolatileCacheFactors {
         }
         return cache.getFactors(i);
     }
+
+    public static void main(String[] args) {
+        int[] arr=new int[]{1,2,3,4};
+        ImmutableClass immutableClass = new ImmutableClass(new BigInteger("123456"), new BigInteger[]{});
+    }
 }
 
 /**
@@ -36,8 +41,14 @@ class ImmutableClass {
     private final BigInteger[] lastFactors;
 
     public ImmutableClass(BigInteger i, BigInteger[] factors) {
+        /**
+         * 注释部分就是不安全的发布：对象还没完全构造好，就已经提前溢出
+         */
+        // this.unsafe();
         this.lastNumber = i;
         this.lastFactors = factors;
+        // this.unsafe();
+
     }
 
     public BigInteger[] getFactors(BigInteger i) {
@@ -45,5 +56,8 @@ class ImmutableClass {
             return null;
         }
         return Arrays.copyOf(lastFactors, lastFactors.length);
+    }
+    public void unsafe(){
+        System.out.println(this.lastNumber);
     }
 }
