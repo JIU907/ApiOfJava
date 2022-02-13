@@ -30,10 +30,23 @@ public class T02_Optional {
         }
     }
 
-    private static void get(){
+    /**
+     * 取值操作--
+     * 如果optional.value=null，就会抛出异常
+     */
+    private static void get() {
         Long numA = 1L;
         Long getNum = Optional.of(numA).get();
         System.out.println(getNum);
 
+    }
+
+    /**
+     * 如果optional.value=null
+     * 返回orElse中的值
+     */
+    private static void orElse() {
+        Long num = null;
+        Optional.ofNullable(num).orElse(1L);
     }
 }
