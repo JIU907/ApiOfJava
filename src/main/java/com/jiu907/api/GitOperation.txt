@@ -12,3 +12,8 @@ $ git remote add origin  git@github.com:Lewis-lei/ApiOfJava.git
 git branch -d feat_bilog  -- 删除分支
 git branch -r             -- 查看所有远程分支
 git branch -a             -- 查看所有本地分支
+
+## 提交操作
+git commit --amend  # 重新提交
+                   	# 如果当前的暂存区与上次提交相比没有变化的话，就相当于有机会进行重新编辑提交说明
+                   	# 如果当前的暂存区与上次提交相比发生了变化，就相当与此提交命令会修正上一次的提交
