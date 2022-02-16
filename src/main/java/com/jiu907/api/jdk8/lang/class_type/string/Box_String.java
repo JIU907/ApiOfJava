@@ -159,14 +159,14 @@ public class Box_String {
         System.out.println("indexOf:"+"abc".indexOf("q"));
         /**
          * 从字符串的指定位置查询字符位置
-         *  fromIndex
+         *  fromIndex: 包含关系
          *      <0              :fromIndex=0
          *      >=value.length  :return -1
          *  return
          *      -1: 不存在
          *      >=0: 字符存在，在字符串上的绝对位置，而不是fromIndex的相对地址
          */
-        System.out.println("indexOf:"+"abc".indexOf("a",1));
+        System.out.println("indexOf:"+"abc".indexOf("b",1));
         // 返回字符在字符串中最后一次出现的位置
         System.out.println("lastIndexOf:"+"aabbc".lastIndexOf("a"));
         /**
