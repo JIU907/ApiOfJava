@@ -12,6 +12,11 @@ import java.util.ArrayList;
  * @date: 2022/1/21
  */
 public class redisCall {
+    /**
+     * 特别的：
+     *      集群模式下，Redis 使用 hash tag 插入到同一个哈希槽
+     * @param args
+     */
     public static void main(String[] args) {
         // 1.获取客户端
         RedisClientService redisClient = new RedisClientService("1.15.151.138",6379,"123456");
