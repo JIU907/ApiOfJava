@@ -12,7 +12,7 @@ import java.util.*;
 public class T04_MonitorVehicleTracker {
     /**
      * 即使{@link MutablePoint} 不是线程安全的，但是T04_MonitorVehicleTracker是线程安全的
-     *
+     * <p>
      * 1.locations保存的Map对象和可变对象MutablePoint从未发布(发布出去的是拷贝出的新对象，而不是Map内的对象)
      * 2.每个方法用Synchronized来确保并发访问下的数据一致性
      * 3.外部获取到的MutablePoint对象是与{@link T04_MonitorVehicleTracker#locations}内一致的相同对象，而不是同一个对象！！！
@@ -59,23 +59,27 @@ public class T04_MonitorVehicleTracker {
 
 /**
  * 车辆坐标类
+ * 并不推荐 -> 因为这个类的实例的状态(属性)是可变的
+ * 怎么解决 -> 加final修饰
+ * 为什么   -> 被final修饰的值，是不可变的可以自由的进行共享
+ * -> 因此在返回location时就不需要进行复制
  */
 @Data
 class MutablePoint {
     /**
      * 车辆编号
      */
-    private String id;
+    private /* final */ String id;
 
     /**
      * x坐标
      */
-    private int x;
+    private /* final */ int x;
 
     /**
      * y坐标
      */
-    private int y;
+    private /* final */ int y;
 
     public MutablePoint(String id, int x, int y) {
         this.id = id;
