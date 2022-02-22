@@ -14,6 +14,7 @@ public class T05_VisualComponent {
      * 2.现有方法并没有导致CopyOnWriteArrayList对象发布逸出
      * 3.CopyOnWriteArrayList是一个线程安全的容器
      * 4.所以T05_VisualComponent是一个线程安全的类
+     * -> 这也建立在这2个CopyOnWriteArrayList是没有联系的基础上
      * <p>
      * 5.T05_VisualComponent的状态由2个CopyOnWriteArrayList来决定
      * 这2个CopyOnWriteArrayList对象是线程安全的，所以T05_VisualComponent也是线程安全的
