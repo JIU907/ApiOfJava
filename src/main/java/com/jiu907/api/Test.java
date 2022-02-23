@@ -2,14 +2,7 @@ package com.jiu907.api;
 
 import com.jiu907.api.jdk8.stream.model.User;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.lang.reflect.Method;
 
 /**
  * @Author LeiLiMin
@@ -17,17 +10,43 @@ import java.util.stream.Collectors;
  * @date: 2022/2/15
  */
 public class Test {
-    public static void main(String[] args) {
-        Long[] arrar={1L,2L,3L,4L};
-        StringBuffer sb=new StringBuffer();
-        for (Long aLong : arrar) {
-            sb.append(aLong+",");
-        }
-        String substring = sb.substring(0, sb.length() - 1);
-        System.out.println(substring);
+    private static User user = new User(1, false, "lewis", new User.Address("1", "2", "3"));
 
-        String collect = Arrays.stream(arrar).map(e -> e.toString()).collect(Collectors.joining(","));
-        System.out.println(collect);
+    public static void main(String[] args) throws Exception {
+        Class<TestReflect> testReflectClass = TestReflect.class;
+        Method[] declaredMethods = testReflectClass.getDeclaredMethods();
+        Method[] methods = testReflectClass.getMethods();
+
+        // new Thread(new Runnable() {
+        //     @SneakyThrows
+        //     @Override
+        //     public void run() {
+        //         System.out.println("T1 come in");
+        //         synchronized (user) {
+        //             user.setSex(true);
+        //             Thread.sleep(5000);
+        //             System.out.println("T1 come over");
+        //
+        //         }
+        //     }
+        // }, "T1").start();
+        // Thread.sleep(1000);
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
+        //         synchronized (user) {
+        //             System.out.println("T2 come in");
+        //             System.out.println(user.getSex());
+        //             user.setSex(false);
+        //             System.out.println(user.getSex());
+        //         }
+        //     }
+        // }, "T2").start();
+    }
+}
+
+class TestReflect {
+    protected void testProtected() {
 
     }
 }
