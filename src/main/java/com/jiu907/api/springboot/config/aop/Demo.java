@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Demo {
-    public void doSomething(){
-        System.out.println("==========");
+    public void doSomething() {
+        System.out.println("doSomething");
     }
 }
