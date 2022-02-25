@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Author LeiLiMin
- * @Description: Aop的测试样例
+ * @Description: Aop的测试样例2
  * @date: 2022/2/21
  */
 @Component
 @Aspect
-public class DemoAopConfig implements Ordered {
+public class DemoAopConfig2 implements Ordered {
     /**
      * 切点表示：
      * 访问修饰符 类的限定名.方法名(形参类型..)
@@ -31,13 +31,13 @@ public class DemoAopConfig implements Ordered {
      */
     @Around("pt()")
     public Object around1(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("around1");
+        System.out.println("around2");
         return pjp.proceed();
     }
 
     @Override
     public int getOrder() {
-        return 0;
+        return -1;
     }
     /**
      * 这里稍微提一下SpringAop的后半段流程
