@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Author LeiLiMin
- * @Description: Aop的测试样例
+ * @Description: Aop的测试样例2
  * @date: 2022/2/21
  */
 @Component
 @Aspect
-public class DemoAopConfig implements Ordered {
+// 该类实现了Ordered接口，Spring会根据其getOrder()方法的返回值进行排序执后行
+public class DemoAopConfigOrdered2 implements Ordered {
     /**
      * 切点表示：
      * 访问修饰符 类的限定名.方法名(形参类型..)
@@ -31,13 +32,13 @@ public class DemoAopConfig implements Ordered {
      */
     @Around("pt()")
     public Object around1(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("around1");
+        System.out.println("around2");
         return pjp.proceed();
     }
 
     @Override
     public int getOrder() {
-        return 0;
+        return -1;
     }
     /**
      * 这里稍微提一下SpringAop的后半段流程
@@ -49,6 +50,5 @@ public class DemoAopConfig implements Ordered {
      *   -> 后期的方法调用都是以该类作为入口的
      * 5.然后会进行排序规则依据{@link org.springframework.core.annotation.AnnotationAwareOrderComparator}
      *   -> 可以通过实现 Ordered 接口，来为aspectJPoint进行排序
-     *   -> TODO: 后续测试
      */
 }
