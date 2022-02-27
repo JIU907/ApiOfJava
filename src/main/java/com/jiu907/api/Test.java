@@ -13,6 +13,10 @@ public class Test {
     private static User user = new User(1, false, "lewis", new User.Address("1", "2", "3"));
 
     public static void main(String[] args) throws Exception {
+        /**
+         * 测试目的：
+         *      发射是否能够获取protected修饰的方法
+         */
         Class<TestReflect> testReflectClass = TestReflect.class;
         Method[] declaredMethods = testReflectClass.getDeclaredMethods();
         Method[] methods = testReflectClass.getMethods();
@@ -31,7 +35,7 @@ public class Test {
         //     }
         // }, "T1").start();
         // Thread.sleep(1000);
-        // new Thread(new Runnable() {
+        // new Thread(new Runnable()   提供 {
         //     @Override
         //     public void run() {
         //         synchronized (user) {
@@ -47,6 +51,5 @@ public class Test {
 
 class TestReflect {
     protected void testProtected() {
-
     }
 }
