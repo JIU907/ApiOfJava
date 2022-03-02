@@ -12,9 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @Author LeiLiMin
@@ -26,28 +24,33 @@ public class DingRobotService {
     /**
      * 需要包含的关键词
      */
-    private String[] keyWords = {"阿雷测试"};
+    protected List<String> keyWords;
+
+    {
+        keyWords = new ArrayList<>();
+        keyWords.add("阿雷测试");
+    }
 
     /**
      * 数字签名
      */
-    private String secret;
+    protected String secret = "SEC18fa307bf960d88d9a263871d954730d82c3ee63ed284b4b73f1fd6862af845e";
 
     /**
      * 自定义--是否开启该机器人
      */
-    private boolean onOff = true;
+    protected boolean onOff = true;
 
     // 消息设置
     /**
      * 推送目标地址
      */
-    private String webhook = "https://oapi.dingtalk.com/robot/send";
+    protected String webhook = "https://oapi.dingtalk.com/robot/send";
 
     /**
      * access_token
      */
-    private String accessToken = "012894b09b204678788afefa0741b766dc5c609c87c628bb29e531453329f045";
+    protected String accessToken = "012894b09b204678788afefa0741b766dc5c609c87c628bb29e531453329f045";
 
 
     /**
@@ -101,7 +104,7 @@ public class DingRobotService {
      */
     private boolean containsKeyWords(String msg) {
         // 不存在关键词过滤限制
-        if (Objects.isNull(keyWords) || keyWords.length == 0) return true;
+        if (Objects.isNull(keyWords) || keyWords.size() == 0) return true;
 
         // 需要检测关键字过滤
         for (String keyWord : keyWords) {
@@ -151,16 +154,16 @@ public class DingRobotService {
 
 
     public static void main(String[] args) throws Exception {
-        // DingRobotService textInvokeType = new DingRobotService();
-        //
-        // // 内容
-        // StringBuilder sb = new StringBuilder();
-        // sb.append("阿雷测试:\n");
-        // sb.append("fix processor" + "\n");
-        // // @
-        // ArrayList<String> arMobiles = new ArrayList<>();
-        // arMobiles.add("WB01396");
-        // TextType.At at = new TextType.At(null, arMobiles, false);
-        // textInvokeType.sendTextMsg(sb.toString(), at);
+        DingRobotService textInvokeType = new DingRobotService();
+
+        // 内容
+        StringBuilder sb = new StringBuilder();
+        sb.append("阿雷测试:\n");
+        sb.append("fix processor" + "\n");
+        // @
+        ArrayList<String> arMobiles = new ArrayList<>();
+        arMobiles.add("13683364007");
+        TextType.At at = new TextType.At(arMobiles, null, false);
+        textInvokeType.sendTextMsg(sb.toString(), at);
     }
 }
