@@ -19,6 +19,7 @@ import java.util.*;
  * @Description: 文本类型通知
  * @date: 2022/3/1
  */
+// TODO: 适配SpringBoot改造
 public class DingRobotService {
     // 安全设置
     /**
@@ -153,6 +154,10 @@ public class DingRobotService {
     }
 
 
+    /**
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         DingRobotService textInvokeType = new DingRobotService();
 
