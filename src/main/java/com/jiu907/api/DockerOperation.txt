@@ -1,0 +1,7 @@
+文档地址：https://docs.docker.com/
+
+* 启动Docker ：systemctl start docker
+* 是否启动成功：docker version
+              启动失败会显示Error
+* 查看所有镜像：docker images
+* 启动镜像   ：docker run 镜像名称
