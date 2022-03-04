@@ -1,7 +1,40 @@
 文档地址：https://docs.docker.com/
 
-* 启动Docker ：systemctl start docker
-* 是否启动成功：docker version
-              启动失败会显示Error
-* 查看所有镜像：docker images
-* 启动镜像   ：docker run 镜像名称
+## Docker初步
+    * 启动Docker ：systemctl start docker
+    * 是否启动成功：docker version
+                  启动失败会显示Error
+    * 查看所有镜像：docker images
+    * 启动镜像   ：docker run 镜像名称
+
+## 查看信息
+    * docker Version: 查看Docker版本信息
+    * docker info   : 显示Docker系统信息,包括镜像和容器的数量
+    * docker --help :
+      docker command --help: 命令帮助
+
+## 镜像命令
+    * docker images : 查看所有镜像
+      可选项         : -a -> 显示所有
+                      -q -> 只显示ID
+      Demo
+      ~ docker images
+      镜像的仓库源          镜像的标签         镜像的ID       镜像的创建时间     镜像大小
+      REPOSITORY          TAG              IMAGE ID       CREATED         SIZE
+      dobby               v1               74ec28a37364   6 weeks ago     516MB
+
+    * docker search image-Name: 查找镜像
+      可选项       : --filter=stars=3000 -> 查询过滤，查询收藏数大于3000的项目
+    Demo
+    ~ docker search mysql
+    NAME         DESCRIPTION                                     STARS[收藏量]
+    mysql        MySQL is a widely used, open-source relation…   12204
+
+    * docker pull image-Name: 下载镜像,默认下载最新的
+      docker pull image-Name:tag : 按照版本下载
+
+    * docker rmi image-Name:tag     : 删除镜像
+      docker rmi image-Id           : 删除镜像
+      docker rmi image1-Id image2-Id image3-Id: 删除多个镜像
+      docker rmi $(docker images -aq): 复合操作,删除所有镜像
+
