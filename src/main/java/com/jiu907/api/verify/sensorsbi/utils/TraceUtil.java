@@ -10,24 +10,28 @@ import java.util.UUID;
  * @date: 2022/1/19
  */
 public class TraceUtil {
-    private static ThreadLocal<String> threadLocal=new ThreadLocal<>();
+    /**
+     * 通过ThreadLocal来传递traceId
+     */
+    private static ThreadLocal<String> threadLocal = new ThreadLocal<>();
 
-    public static String readTraceId(){
+    public static String readTraceId() {
 
         return threadLocal.get();
     }
-    public static void writeTraceId(String traceId){
-        if(StringUtils.isBlank(traceId)){
+
+    public static void writeTraceId(String traceId) {
+        if (StringUtils.isBlank(traceId)) {
             throw new RuntimeException("traceId is blank");
         }
         threadLocal.set(traceId);
     }
 
-    public static void delTraceId(){
+    public static void delTraceId() {
         threadLocal.remove();
     }
 
-    public static String createTraceId(){
+    public static String createTraceId() {
         return UUID.randomUUID().toString().replace("-", "");
     }
 }
