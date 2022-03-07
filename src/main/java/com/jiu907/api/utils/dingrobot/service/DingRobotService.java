@@ -79,21 +79,19 @@ public class DingRobotService {
      * 通用操作
      */
     private Map<String, String> globalOps(String msg, TextType.At at) throws Exception {
-        if (onOff) {
-            // 1.消息检测 - 是否包含关键字
-            if (!this.containsKeyWords(msg)) {
-                throw new RuntimeException("the msg not contains keywords");
-            }
-
-            // 2.@设置 - 目前强制让@userId失效
-            if (Objects.nonNull(at)) {
-                at.setAtUserIds(null);
-            }
-
-            // 3.系统检测 - paramMap生产
-            return genParamMap();
+        assert this.onOff = true;
+        // 1.消息检测 - 是否包含关键字
+        if (!this.containsKeyWords(msg)) {
+            throw new RuntimeException("the msg not contains keywords");
         }
-        throw new RuntimeException("fail to throw global check");
+
+        // 2.@设置 - 目前强制让@userId失效
+        if (Objects.nonNull(at)) {
+            at.setAtUserIds(null);
+        }
+
+        // 3.系统检测 - paramMap生产
+        return genParamMap();
     }
 
 
