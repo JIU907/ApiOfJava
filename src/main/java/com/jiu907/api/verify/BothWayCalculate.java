@@ -42,7 +42,9 @@ public class BothWayCalculate {
      * 2.计算双线
      * *: 单线求最大值
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        collectionRevers();
+        Thread.currentThread().wait();
         // 1.生产棋盘 [3*5],先排后列
         List<List<Integer>> spinResult = genSpinResult();
 
@@ -80,5 +82,32 @@ public class BothWayCalculate {
             result.add(linesResult);
         }
         return result;
+    }
+
+    /**
+     * 里层元素顺序不变,外层的顺序变了
+     * [[1, 2, 3], [21, 22, 23], [31, 32, 33]]
+     * [[31, 32, 33], [21, 22, 23], [1, 2, 3]]
+     */
+    public static void collectionRevers() {
+        List<Integer> sub1 = new ArrayList<>();
+        sub1.add(1);
+        sub1.add(2);
+        sub1.add(3);
+        List<Integer> sub2 = new ArrayList<>();
+        sub2.add(21);
+        sub2.add(22);
+        sub2.add(23);
+        List<Integer> sub3 = new ArrayList<>();
+        sub3.add(31);
+        sub3.add(32);
+        sub3.add(33);
+        List<List<Integer>> sup = new ArrayList<>();
+        sup.add(sub1);
+        sup.add(sub2);
+        sup.add(sub3);
+        System.out.println(sup);
+        Collections.reverse(sup);
+        System.out.println(sup);
     }
 }
