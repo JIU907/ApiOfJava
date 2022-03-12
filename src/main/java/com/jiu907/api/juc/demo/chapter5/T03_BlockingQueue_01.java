@@ -16,7 +16,9 @@ public class T03_BlockingQueue_01 {
     private final Producer producer;
     private final Consumer consumer;
 
-
+    /**
+     * 1.用外部类封装2个内部类，来保证生产者和消费者来保证用的是同一个消费队列
+     */
     public T03_BlockingQueue_01() {
         ArrayBlockingQueue<String> taskQueue = new ArrayBlockingQueue(100);
         producer = new Producer(taskQueue);
@@ -27,7 +29,7 @@ public class T03_BlockingQueue_01 {
         producer.produceData(string);
     }
 
-    // 生产者
+    // 内部类：生产者
     class Producer {
         private final ArrayBlockingQueue<String> taskQueue;
 
@@ -40,7 +42,7 @@ public class T03_BlockingQueue_01 {
         }
     }
 
-    // 消费者
+    // 内部类：消费者
     class Consumer implements Runnable {
         private final ArrayBlockingQueue<String> taskQueue;
 
