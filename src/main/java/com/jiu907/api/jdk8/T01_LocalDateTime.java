@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author LeiLiMin
@@ -25,9 +24,5 @@ public class T01_LocalDateTime {
         long max = LocalDateTime.of(LocalDate.now(), LocalTime.MAX).toInstant(ZoneOffset.of("+8")).toEpochMilli();
 
         System.out.println(milliSecond.equals(System.currentTimeMillis())); //true
-
-        float v = ThreadLocalRandom.current().nextFloat();
-        System.out.println(v);
-        System.out.println((int) (v * 100));
     }
 }
