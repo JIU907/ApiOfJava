@@ -18,5 +18,10 @@ public class T01_MathTest {
         System.out.println(Arrays.asList(betList).contains(totalBets));
 
         System.out.println("38404872aa4cd7ce27dc47edfac0fd".length());
+
+
+        // 要想断言生效，需要添加启动参数-ea
+        assert false;
+        System.out.println(1);
     }
 }
