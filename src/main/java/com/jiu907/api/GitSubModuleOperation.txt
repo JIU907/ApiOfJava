@@ -1,0 +1,16 @@
+## 为项目新增submodule
+git submodule add ssh:xxxx.git  ./dirPath
+
+## 更新submodule
+git submodule init
+git submodule update
+
+## 删除submodule缓存 (例如删掉mavlink)
+git rm --cached modules/mavlink/
+删除 .gitmodules中mavlink的内容
+删除 .git/config中mavlink的内容
+删除 .git/modules/中mavlink的内容
+删除mavlink git库中的所有git的内容：find ./|grep "\.git"|xargs rm
+
+git add modules/mavlink/
+git commit
