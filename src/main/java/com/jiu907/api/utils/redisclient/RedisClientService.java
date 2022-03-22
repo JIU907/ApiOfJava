@@ -56,4 +56,9 @@ public class RedisClientService {
         Object eval = jedisClient.eval(script, keysArr.length, keysArr);
         return eval.toString();
     }
+
+    public String evalArgs(String script, List<String> keys, List<String> args) {
+        Object eval = jedisClient.eval(script, keys, args);
+        return String.valueOf(eval);
+    }
 }

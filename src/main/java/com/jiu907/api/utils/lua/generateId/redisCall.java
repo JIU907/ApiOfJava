@@ -26,11 +26,10 @@ public class redisCall {
         String script = FileStream.readData("/Users/leilimin/IDEA-MySpace/ApiOfJava/src/main/java/com/jiu907/api/utils/lua/refreshPool/RefreshPool.lua");
 
         // 查看结果校验
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("RecordTime");
-        strings.add(String.valueOf(10000));
-        strings.add(String.valueOf(System.currentTimeMillis()));
-        strings.add("JackpotPool");
-        System.out.println(redisClient.evalNoArgs(script, strings));
+        ArrayList<String> keys = new ArrayList<>();
+        keys.add("jackpotPool");
+        ArrayList<String> arg = new ArrayList<>();
+        arg.add(String.valueOf(3600));
+        System.out.println(redisClient.evalArgs(script, keys, arg));
     }
 }
