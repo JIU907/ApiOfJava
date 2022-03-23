@@ -1,0 +1,5 @@
+## Mac上打开jconsole
+1. /usr/libexec/java_home -V
+2. cd /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
+3. cd lib
+4. jconsole
