@@ -21,7 +21,7 @@ public class T03_Stream {
     /**
      * 对每一个元素进行筛选操作
      */
-    public static void invokeMap(){
+    public static void invokeMap() {
         List<User> users = User.getUsers();
         List<Integer> ageList = users.stream().map(e -> e.getAge()).collect(Collectors.toList());
         System.out.println(ageList);
@@ -30,7 +30,7 @@ public class T03_Stream {
     /**
      * 只能是过滤，决定的是是否留下，而不能改变流中元素的类型
      */
-    public static void invokeFilter(){
+    public static void invokeFilter() {
         List<User> users = User.getUsers();
         // 将filter中返回结构为ture的元素保留下来，过滤为false的元素
         List<User> males = users.stream().filter(e -> e.getSex() == true).collect(Collectors.toList());
@@ -86,11 +86,11 @@ public class T03_Stream {
     /**
      * 将集合中的每个元素通过分隔符拼接起来
      */
-    public static void invokeJoin(){
-        Long[] arrar={1L,2L,3L,4L};
-        StringBuffer sb=new StringBuffer();
+    public static void invokeJoin() {
+        Long[] arrar = {1L, 2L, 3L, 4L};
+        StringBuffer sb = new StringBuffer();
         for (Long aLong : arrar) {
-            sb.append(aLong+",");
+            sb.append(aLong + ",");
         }
         String substring = sb.substring(0, sb.length() - 1);
         System.out.println(substring);
@@ -103,7 +103,7 @@ public class T03_Stream {
     /**
      * 对元素进行操作
      */
-    public static void calculateSumOfInt(){
+    public static void calculateSumOfInt() {
         List<Integer> weight = new ArrayList<>();
         weight.add(1);
         weight.add(3);
@@ -111,6 +111,25 @@ public class T03_Stream {
         weight.add(7);
 
         int weightAccMax = weight.stream().mapToInt(Integer::intValue).sum();
+        int[] arr = new int[]{1, 2, 3, 4};
+        String collect = Arrays.stream(arr).mapToObj(e -> String.valueOf(e)).collect(Collectors.joining(","));
+    }
+
+    /**
+     * List<int[]>类型输出: 因为int[]在日志输出时为内存地址，所以需要用到这种方式来进行简便的日志输出
+     */
+    public static void basicArrInList() {
+        int[] arr1 = new int[]{1, 2, 3, 4, 5};
+        int[] arr2 = new int[]{6, 7, 8, 9, 10};
+        int[] arr3 = new int[]{11, 12, 13, 14, 15};
+        List<int[]> list = new ArrayList<>();
+        list.add(arr1);
+        list.add(arr2);
+        list.add(arr3);
+
+        System.out.println(list.stream().map(e ->
+                Arrays.stream(e).mapToObj(i -> String.valueOf(i)).collect(Collectors.joining(","))
+        ).collect(Collectors.toList()));
     }
 
 }
