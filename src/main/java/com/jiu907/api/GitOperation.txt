@@ -21,3 +21,10 @@ git commit --amend  # 重新提交
 
 ## 补充提交
 git commit --date="Feb 3  9:05:20 2022 +0800" -am "test-补充提交"
+
+## merge rebase cherry-pick revert
+[merge]: 将fix和master的结果进行合并
+         目录上保留这2个操作树
+         https://www.jianshu.com/p/58a166f24c81
+$ git checkout master
+$ git merge fix
